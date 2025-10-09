@@ -1,11 +1,11 @@
 # DevOps Course Work - Group 16
-![GitHub Release](https://img.shields.io/github/v/release/scas-dotcom/SET09803Group16)
+![GitHub Release](https://img.shields.io/github/v/release/stevecastillonapier/Group16Devops)
 
-![GitHub License](https://img.shields.io/github/license/scas-dotcom/SET09803Group16)
+![GitHub License](https://img.shields.io/github/license/stevecastillonapier/Group16Devops)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/scas-dotcom/SET09803Group16/main.yml?branch=master&label=master%20build)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/stevecastillonapier/Group16Devops/main.yml?branch=master&label=master%20build)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/scas-dotcom/SET09803Group16/main.yml?branch=develop&label=develop%20build)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/stevecastillonapier/Group16Devops/main.yml?branch=develop&label=develop%20build)
 
 
 
