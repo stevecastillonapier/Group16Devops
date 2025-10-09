@@ -1,5 +1,9 @@
 # DevOps Course Work - Group 16
+![GitHub Release](https://img.shields.io/github/v/release/stevecastillonapier/SET09803Group16)
 
+![GitHub License](https://img.shields.io/github/license/stevecastillonapier/SET09803Group16)
+
+## Description
 This project is a coursework assignment for a DevOps module that demonstrates the principles of integrating a Java application with a MySQL database.
 The application provides an easy way to access and generate reports on population information.
 It also includes automated builds, Dockerization, and GitHub Actions for continuous integration and delivery.
