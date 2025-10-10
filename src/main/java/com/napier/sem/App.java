@@ -7,7 +7,10 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args)
     {
-        System.out.println("Boo yah!");
+        System.out.println("=====================================");
+        System.out.println("  Welcome to the World Data Explorer ");
+        System.out.println("=====================================");
+        System.out.println();
 
         // Create new Application
         App a = new App();
