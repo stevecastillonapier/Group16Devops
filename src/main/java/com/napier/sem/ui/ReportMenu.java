@@ -15,6 +15,12 @@ public class ReportMenu {
     }
 
     public void displayMainMenu() {
+
+        if (System.getenv("CI") != null) {
+            System.out.println("Running in CI environment — skipping interactive menu.");
+            return;
+        }
+
         System.out.println("=== Main Menu ===");
         System.out.println("Welcome! Please select a report:");
 
