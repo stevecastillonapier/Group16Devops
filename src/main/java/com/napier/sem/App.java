@@ -1,5 +1,9 @@
 package com.napier.sem;
 
+import com.napier.sem.repository.ReportRepository;
+import com.napier.sem.service.ReportService;
+import com.napier.sem.ui.ReportMenu;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,13 +17,35 @@ public class App {
         System.out.println();
 
         // Create new Application
-        App a = new App();
+          App a = new App();
 
         // Connect to database
-        a.connect();
+         a.connect();
+
+
+            ReportRepository reportRepo = new ReportRepository(a.con);
+            //testing
+           // System.out.println(reportRepo.getReportById(1).toString());
+
+
+            ReportService reportService = new ReportService(a.con, reportRepo);
+            ReportMenu menu = new ReportMenu(reportService);
+
+            menu.displayMainMenu();
+
 
         //disconnect from database
-        a.disconnect();
+         a.disconnect();
+
+        System.out.println("Goodbye!");
+
+
+
+        // Connect to database
+       // a.connect();
+
+        //disconnect from database
+       // a.disconnect();
 
 
     }
