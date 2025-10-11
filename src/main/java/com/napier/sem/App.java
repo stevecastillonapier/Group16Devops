@@ -31,12 +31,12 @@ public class App {
             ReportService reportService = new ReportService(a.con, reportRepo);
             ReportMenu menu = new ReportMenu(reportService);
 
-           // menu.displayMainMenu();
-        //hide menu for testing
-        int reportId = 1;
-
-        System.out.println("\nRunning report ID: " + reportId);
-        reportService.runReport(reportId);
+        if (args.length > 0) {
+            int reportId = Integer.parseInt(args[0]);
+            reportService.runReport(reportId); // automated, non-interactive
+        } else {
+            menu.displayMainMenu(); // interactive mode for local runs
+        }
 
         //disconnect from database
          a.disconnect();
