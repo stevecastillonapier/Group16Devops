@@ -1,4 +1,3 @@
-
 Our Pledge
 
 Welcome to the GROUP 16 DEVOPS Team!
