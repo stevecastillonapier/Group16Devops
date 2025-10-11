@@ -31,8 +31,12 @@ public class App {
             ReportService reportService = new ReportService(a.con, reportRepo);
             ReportMenu menu = new ReportMenu(reportService);
 
-            menu.displayMainMenu();
+           // menu.displayMainMenu();
+        //hide menu for testing
+        int reportId = 1;
 
+        System.out.println("\nRunning report ID: " + reportId);
+        reportService.runReport(reportId);
 
         //disconnect from database
          a.disconnect();
