@@ -1,5 +1,9 @@
 package com.napier.sem;
 
+import com.napier.sem.repository.ReportRepository;
+import com.napier.sem.service.ReportService;
+import com.napier.sem.ui.ReportMenu;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,16 +11,45 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args)
     {
-        System.out.println("Boo yah!");
+        System.out.println("=====================================");
+        System.out.println("  Welcome to the World Data Explorer ");
+        System.out.println("=====================================");
+        System.out.println();
 
         // Create new Application
-        App a = new App();
+          App a = new App();
 
         // Connect to database
-        a.connect();
+         a.connect();
+
+
+            ReportRepository reportRepo = new ReportRepository(a.con);
+            //testing
+           // System.out.println(reportRepo.getReportById(1).toString());
+
+
+            ReportService reportService = new ReportService(a.con, reportRepo);
+            ReportMenu menu = new ReportMenu(reportService);
+
+        if (args.length > 0) {
+            int reportId = Integer.parseInt(args[0]);
+            reportService.runReport(reportId); // automated, non-interactive
+        } else {
+            menu.displayMainMenu(); // interactive mode for local runs
+        }
 
         //disconnect from database
-        a.disconnect();
+         a.disconnect();
+
+        System.out.println("Goodbye!");
+
+
+
+        // Connect to database
+       // a.connect();
+
+        //disconnect from database
+       // a.disconnect();
 
 
     }
@@ -52,6 +85,7 @@ public class App {
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "CRGroup16");
+                //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }

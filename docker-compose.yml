@@ -3,8 +3,12 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
+    depends_on:
+      - db
 
   # db is is db folder
   db:
     build: db/.
+    #ports:
+     # - 3306:3306
     restart: always
