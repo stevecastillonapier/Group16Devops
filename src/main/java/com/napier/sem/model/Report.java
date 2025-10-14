@@ -6,24 +6,34 @@ import java.util.Objects;
 
 /**
  * Model representing a report definition stored in the database.
- *
- * Typical database table columns:
- *  - id (INT)
- *  - title (VARCHAR)
- *  - sql_query (TEXT)
- *  - parameter_name (VARCHAR)         -- optional
- *  - parameter_prompt (VARCHAR)       -- optional
+ * This class serves as a Data Transfer Object (DTO) for report metadata.
  */
 public class Report {
+
+    //Report unique identifier (Primary Key).
     public int id;
+
+    //User-friendly title for the report.
     public String title;
-    public String sql;               // the SQL template (may contain placeholders like %param%)
-    public String parameterName;     // optional (e.g. "region")
+
+    //The SQL template to be executed (may contain placeholders like %param%).
+    public String sql;
+
+    //The name of the parameter expected by the SQL query (e.g. "region"). Optional.
+    public String parameterName;
+
+    //The prompt text displayed to the user to request the parameter value (e.g. "Please enter region:"). Optional.
     public String parameterPrompt;   // optional (e.g. "Please enter region:")
 
+    /**
+     * Default no-argument constructor.
+     */
     public Report() {
     }
 
+    /**
+     * Full constructor for initializing all fields.
+     */
     public Report(int id, String title, String sql, String parameterName, String parameterPrompt) {
         this.id = id;
         this.title = title;
@@ -34,7 +44,7 @@ public class Report {
 
     /**
      * Create a Report instance from a ResultSet row.
-     * Expects the ResultSet to contain columns named at least:
+     * ResultSet contain columns named:
      *  - id
      *  - title
      *  - sql (or sql_query)
@@ -47,24 +57,32 @@ public class Report {
      */
     public static Report fromResultSet(ResultSet rs) throws SQLException {
         Report r = new Report();
-        // try a few common SQL column names for the SQL text
+
+        // Non-optional columns (will throw SQLException if missing)
         r.id = rs.getInt("id");
         r.title = rs.getString("title");
 
+        // Logic to handle multiple possible column names for the SQL text
         String sqlText = null;
         try { sqlText = rs.getString("sql"); } catch (SQLException ignored) {}
         if (sqlText == null) {
             try { sqlText = rs.getString("sql_query"); } catch (SQLException ignored) {}
         }
+
+        // NOTE: If both fail, r.sql will be null. Consider throwing an exception if SQL is mandatory.
         r.sql = sqlText;
 
-        // optional parameters
+        // Optional parameters: Using try-catch to gracefully handle missing columns
         try { r.parameterName = rs.getString("parameter_name"); } catch (SQLException ignored) { r.parameterName = null; }
         try { r.parameterPrompt = rs.getString("parameter_prompt"); } catch (SQLException ignored) { r.parameterPrompt = null; }
+
         return r;
     }
 
-    /** Returns true if this report expects a parameter (non-empty parameterName). */
+    /**
+     * Checks if this report requires a parameter to be executed.
+     * @return true if parameterName is not null and not empty after trimming.
+     */
     public boolean requiresParameter() {
         return parameterName != null && !parameterName.trim().isEmpty();
     }
@@ -85,6 +103,11 @@ public class Report {
     public String getParameterPrompt() { return parameterPrompt; }
     public void setParameterPrompt(String parameterPrompt) { this.parameterPrompt = parameterPrompt; }
 
+    /**
+     * Provides a string representation of the Report object for logging and debugging.
+     * Note: The SQL text is truncated for readability.
+     * @return A formatted string showing all field values.
+     */
     @Override
     public String toString() {
         return "Report{" +
@@ -96,12 +119,16 @@ public class Report {
                 '}';
     }
 
+    /**
+     * Equals contract. Checks equality based on all fields.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Report report = (Report) o;
+
         return id == report.id &&
                 Objects.equals(title, report.title) &&
                 Objects.equals(sql, report.sql) &&
@@ -109,6 +136,9 @@ public class Report {
                 Objects.equals(parameterPrompt, report.parameterPrompt);
     }
 
+    /**
+     * Standard implementation of the hashCode contract, consistent with equals.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, title, sql, parameterName, parameterPrompt);
