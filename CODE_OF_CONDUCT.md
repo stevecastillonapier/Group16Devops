@@ -14,6 +14,14 @@ These are examples of behaviors that contribute to creating a positive environme
 4. Be constructive: Provide helpful feedback and criticism with the intention of improving the project. Avoid derogatory or inflammatory remarks.
 5. Be mindful of language: Use inclusive language and avoid offensive or inappropriate language in all interactions within the project.
 
+## Commitment to Continuous Learning
+We recognize that technology and best practices are always evolving. Each team member is encouraged to keep learning, share new insights, and support others in improving their skills. We value curiosity, humility, and the willingness to seek help or teach others when needed.
+
+## Respect for Different Time Zones
+As a distributed team, we acknowledge that members may be located in different regions or countries. We commit to being mindful of meeting times, response expectations, and deadlines. Communication should always be considerate of others’ working hours and personal schedules.
+
+## Responsibility in Version Control Practices
+We use Git and GitHub to collaborate effectively and maintain code quality. Every contributor is responsible for following version control best practices — including creating clear branches, writing meaningful commit messages, resolving merge conflicts respectfully, and reviewing pull requests carefully before approval.
 
 ## Unacceptable Behavior
 
