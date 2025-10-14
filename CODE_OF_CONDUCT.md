@@ -16,11 +16,11 @@ These are examples of behaviors that contribute to creating a positive environme
 Unacceptable Behavior
 
 The following behaviors are considered unacceptable within our project:
-• Harassment, discrimination, or intimidation of any form.
-• Offensive or inappropriate language or imagery.
-• Personal attack or derogatory comments.
-• Trolling, spamming, or other disruptive behavior.
-• Any other conduct that could reasonably be considered inappropriate.
+- • Harassment, discrimination, or intimidation of any form.
+- • Offensive or inappropriate language or imagery.
+- • Personal attack or derogatory comments.
+- • Trolling, spamming, or other disruptive behavior.
+- • Any other conduct that could reasonably be considered inappropriate.
 
 Reporting Violations
 
@@ -31,9 +31,9 @@ Enforcement
 The Project team leader is responsible for enforcing this code of conduct. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The team leader will maintain confidentiality regarding the reporter of an incident. Participants who engage in unacceptable behavior may be asked to stop their behavior and may face consequences, including temporary or permanent bans from the project.
 Appeal
 If you are banned, you may contest the decision. To do so contact Steve Castillo with the subject line “Repeal Ban for (Name)” and body with the responses to the following:
-• Why do you believe you did not violate the Code of Conduct?
-• Were other factors involved in this situation that the team may have been unaware of?
-• Why do you wish to be part of this Project?
+- • Why do you believe you did not violate the Code of Conduct?
+- • Were other factors involved in this situation that the team may have been unaware of?
+- • Why do you wish to be part of this Project?
 
 Acknowledgment
 
