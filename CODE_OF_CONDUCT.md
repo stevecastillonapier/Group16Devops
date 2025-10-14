@@ -6,11 +6,11 @@ Our Standards
 
 These are examples of behaviors that contribute to creating a positive environment:
 
-1. Be Respectful: Treat others with kindness and respect and empathy. We are all here to collaborate and learn from one another.
-2. Be inclusive: We welcome contributions from all members as it is necessary that all members contribute towards this project so to be completed on time.
-3. Be collaborative: Work together with all members to achieve common goals. Support and encourage each other’s efforts.
-4. Be constructive: Provide helpful feedback and criticism with the intention of improving the project. Avoid derogatory or inflammatory remarks.
-5. Be mindful of language: Use inclusive language and avoid offensive or inappropriate language in all interactions within the project.
+- 1. Be Respectful: Treat others with kindness and respect and empathy. We are all here to collaborate and learn from one another.
+- 2. Be inclusive: We welcome contributions from all members as it is necessary that all members contribute towards this project so to be completed on time.
+- 3. Be collaborative: Work together with all members to achieve common goals. Support and encourage each other’s efforts.
+- 4. Be constructive: Provide helpful feedback and criticism with the intention of improving the project. Avoid derogatory or inflammatory remarks.
+- 5. Be mindful of language: Use inclusive language and avoid offensive or inappropriate language in all interactions within the project.
 
 
 Unacceptable Behavior
