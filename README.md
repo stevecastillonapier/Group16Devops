@@ -12,7 +12,7 @@
 ## Description
 This project is a coursework assignment for a DevOps module that demonstrates the principles of integrating a Java application with a MySQL database.
 The application provides an easy way to access and generate reports on population information.
-It also includes automated builds, Dockerization, and GitHub Actions for continuous integration and delivery.
+It also includes automated builds, Dockerization, and GitHub Actions for continuous integration and delivery.  The program uses a reporting service and pulls queries and parameters directly from the database.  This structure provides a better method for scalability if other reports need to be generated quickly.
 
 ## Project Architecture
 - **Language:** Java 17
