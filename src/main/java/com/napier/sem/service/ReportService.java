@@ -55,10 +55,25 @@ public class ReportService {
     public void runReport(Report report) {
         try {
             String sql = report.sql;
+            Scanner sc = new Scanner(System.in);
 
-            // Prompt user if report requires a parameter
-            if (report.parameterName != null && !report.parameterName.isEmpty()) {
-                Scanner sc = new Scanner(System.in);
+            // Handle continent parameter if it exists
+            if (sql.contains("%continent%")) {
+                System.out.print(report.parameterPrompt + ": ");
+                String continent = sc.nextLine();
+                sql = sql.replace("%continent%", continent);
+            }
+
+            // Handle N parameter if it exists
+            if (sql.contains("%n%")) {
+                System.out.print("Please enter the number of results to show: ");
+                String n = sc.nextLine();
+                sql = sql.replace("%n%", n);
+            }
+
+            // Handle other single parameters
+            if (report.parameterName != null && !report.parameterName.isEmpty() && 
+                !report.parameterName.equals("continent") && !report.parameterName.equals("n")) {
                 System.out.print(report.parameterPrompt + ": ");
                 String value = sc.nextLine();
                 sql = sql.replace("%" + report.parameterName + "%", value);
