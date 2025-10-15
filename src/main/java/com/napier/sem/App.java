@@ -8,9 +8,26 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The main entry point for the World Data Explorer application.
+ * This class handles the initial setup, including database connection,
+ * and manages the application lifecycle and flow (interactive vs. automated reporting).
+ */
+
 public class App {
+
+    /**
+     * Connection to the MySQL database.
+     * It is set during the connect() method call.
+     */
+    private Connection con = null;
+
+    /**
+     * Main method to start the application.
+     */
     public static void main(String[] args)
     {
+        //welcome banner
         System.out.println("=====================================");
         System.out.println("  Welcome to the World Data Explorer ");
         System.out.println("=====================================");
@@ -19,18 +36,15 @@ public class App {
         // Create new Application
           App a = new App();
 
-        // Connect to database
-         a.connect();
+        // Connect to the database. This connection object will be passed to other components.
+        a.connect();
 
+        // Initialize core application components, injecting the Connection dependency.
+        ReportRepository reportRepo = new ReportRepository(a.con);
+        ReportService reportService = new ReportService(a.con, reportRepo);
+        ReportMenu menu = new ReportMenu(reportService);
 
-            ReportRepository reportRepo = new ReportRepository(a.con);
-            //testing
-           // System.out.println(reportRepo.getReportById(1).toString());
-
-
-            ReportService reportService = new ReportService(a.con, reportRepo);
-            ReportMenu menu = new ReportMenu(reportService);
-
+        // Determine execution mode (automated vs. interactive)
         if (args.length > 0) {
             int reportId = Integer.parseInt(args[0]);
             reportService.runReport(reportId); // automated, non-interactive
@@ -38,29 +52,18 @@ public class App {
             menu.displayMainMenu(); // interactive mode for local runs
         }
 
-        //disconnect from database
-         a.disconnect();
+        // Disconnect from database at the end of execution
+        a.disconnect();
 
-        System.out.println("Goodbye!");
+        System.out.println("!!!!!Have a great day and thank you for using World Data Explorer!!!!!");
 
-
-
-        // Connect to database
-       // a.connect();
-
-        //disconnect from database
-       // a.disconnect();
+    }//end of main
 
 
-    }
-
-    /**
-     * Connection to MySQL database.
-     */
-    private Connection con = null;
 
     /**
      * Connect to the MySQL database.
+     * This method attempts multiple retries to connect.
      */
     public void connect()
     {
@@ -75,7 +78,7 @@ public class App {
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 10; // Number of connection attempts
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
@@ -102,7 +105,7 @@ public class App {
     }
 
     /**
-     * Disconnect from the MySQL database.
+     * Disconnect from the MySQL database by closing the connection.
      */
     public void disconnect()
     {
