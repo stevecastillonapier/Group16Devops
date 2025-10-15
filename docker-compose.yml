@@ -5,6 +5,8 @@ services:
     build: .
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
 
   # db is is db folder
   db:
