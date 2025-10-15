@@ -37,13 +37,13 @@ b) Sorts them in descending order by population.
 
 6. The system displays the results in a structured list.
 ________________________________________
-Alternative Flows
-AF2: No countries found for selected continent or region. The system notifies the user that no data is available for the chosen filter.
+## Alternative Flows
+**AF2:** No countries found for selected continent or region. The system notifies the user that no data is available for the chosen filter.
 ________________________________________
-Exceptions
-E1: System is unable to retrieve country data (e.g., database error).The system displays an error message indicating a data retrieval issue.
+## Exceptions
+**E1:** System is unable to retrieve country data (e.g., database error).The system displays an error message indicating a data retrieval issue.
 ________________________________________
-Assumptions
-•Country population data is stored and updated regularly.
-•The Marketing Manager has a basic understanding of filters and the purpose of the feature.
+## Assumptions
+- Country population data is stored and updated regularly.
+- The Marketing Manager has a basic understanding of filters and the purpose of the feature.
 ________________________________________
