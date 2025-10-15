@@ -7,6 +7,47 @@
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/stevecastillonapier/Group16Devops/main.yml?branch=develop&label=develop%20build)
 
+![Code Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen?logo=codecov&logoColor=white)
+
+## Requirements Completion Status
+
+**32 requirements of 32 have been implemented, which is 100%.**
+
+| ID | Name | Met | Screenshot |
+|----|------|-----|------------|
+| 1 | All the countries in the world organised by largest population to smallest. | Yes | ![Report 1](screenshots/report-47/report-47.png) |
+| 2 | All the countries in a continent organised by largest population to smallest. | Yes | ![Report 2](screenshots/report-48/report-48.png) |
+| 3 | All the countries in a region organised by largest population to smallest. | Yes | ![Report 3](screenshots/report-49/report-49.png) |
+| 4 | The top N populated countries in the world where N is provided by the user. | Yes | ![Report 4](screenshots/report-50/report-50.png) |
+| 5 | The top N populated countries in a continent where N is provided by the user. | Yes | ![Report 5](screenshots/report-51/report-51.png) |
+| 6 | The top N populated countries in a region where N is provided by the user. | Yes | ![Report 6](screenshots/report6.png) |
+| 7 | All the cities in the world organised by largest population to smallest. | Yes | ![Report 7](screenshots/report-52/report-52.png) |
+| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![Report 8](screenshots/report-53/report-53.png) |
+| 9 | All the cities in a region organised by largest population to smallest. | Yes | ![Report 9](screenshots/report9.png) |
+| 10 | All the cities in a country organised by largest population to smallest. | Yes | ![Report 10](screenshots/report10.png) |
+| 11 | All the cities in a district organised by largest population to smallest. | Yes | ![Report 11](screenshots/report11.png) |
+| 12 | The top N populated cities in the world where N is provided by the user. | Yes | ![Report 12](screenshots/report-54/report-54.png) |
+| 13 | The top N populated cities in a continent where N is provided by the user. | Yes | ![Report 13](screenshots/report13.png) |
+| 14 | The top N populated cities in a region where N is provided by the user. | Yes | ![Report 14](screenshots/report14.png) |
+| 15 | The top N populated cities in a country where N is provided by the user. | Yes | ![Report 15](screenshots/report15.png) |
+| 16 | The top N populated cities in a district where N is provided by the user. | Yes | ![Report 16](screenshots/report16.png) |
+| 17 | All the capital cities in the world organised by largest population to smallest. | Yes | ![Report 17](screenshots/report-55/report-55.png) |
+| 18 | All the capital cities in a continent organised by largest population to smallest. | Yes | ![Report 18](screenshots/report18.png) |
+| 19 | All the capital cities in a region organised by largest to smallest. | Yes | ![Report 19](screenshots/report19.png) |
+| 20 | The top N populated capital cities in the world where N is provided by the user. | Yes | ![Report 20](screenshots/report20.png) |
+| 21 | The top N populated capital cities in a continent where N is provided by the user. | Yes | ![Report 21](screenshots/report21.png) |
+| 22 | The top N populated capital cities in a region where N is provided by the user. | Yes | ![Report 22](screenshots/report22.png) |
+| 23 | The population of people, people living in cities, and people not living in cities in each continent. | Yes | ![Report 23](screenshots/report23.png) |
+| 24 | The population of people, people living in cities, and people not living in cities in each region. | Yes | ![Report 24](screenshots/report24.png) |
+| 25 | The population of people, people living in cities, and people not living in cities in each country. | Yes | ![Report 25](screenshots/report25.png) |
+| 26 | The population of the world. | Yes | ![Report 26](screenshots/report-56/report-56.png) |
+| 27 | The population of a continent. | Yes | ![Report 27](screenshots/report27.png) |
+| 28 | The population of a region. | Yes | ![Report 28](screenshots/report28.png) |
+| 29 | The population of a country. | Yes | ![Report 29](screenshots/report29.png) |
+| 30 | The population of a district. | Yes | ![Report 30](screenshots/report30.png) |
+| 31 | The population of a city. | Yes | ![Report 31](screenshots/report31.png) |
+| 32 | The number of people who speak Chinese, English, Hindi, Spanish, and Arabic. | Yes | ![Report 32](screenshots/report-57/report-57.png) |
+
 
 
 ## Description
