@@ -20,77 +20,72 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit tests for the ReportService class.
- * These tests verify that the service layer correctly handles business logic
- * for running reports and managing user interactions.
+ * Tests for the ReportService class.
+ * These tests check that the service works correctly with reports.
  */
 @DisplayName("ReportService Tests")
 class ReportServiceTest {
 
     @Mock
-    private Connection mockConnection;
+    private Connection con;
     
     @Mock
-    private ReportRepository mockRepository;
+    private ReportRepository repo;
     
     @Mock
-    private Statement mockStatement;
+    private Statement stmt;
     
     @Mock
-    private ResultSet mockResultSet;
+    private ResultSet rs;
     
-    private ReportService reportService;
+    private ReportService service;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        reportService = new ReportService(mockConnection, mockRepository);
+        service = new ReportService(con, repo);
     }
 
     @Test
-    @DisplayName("Should run report successfully when report exists")
-    void testRunReport_Success() throws SQLException {
-        // Arrange
+    @DisplayName("Should run report")
+    void testRunReport() throws SQLException {
+        // Test running a report successfully
         int reportId = 1;
-        Report mockReport = new Report();
-        mockReport.id = reportId;
-        mockReport.title = "Test Report";
-        mockReport.sql = "SELECT * FROM test";
-        mockReport.parameterName = "";
-        mockReport.parameterPrompt = "";
+        Report report = new Report();
+        report.id = reportId;
+        report.title = "Test Report";
+        report.sql = "SELECT * FROM test";
+        report.parameterName = "";
+        report.parameterPrompt = "";
         
-        when(mockRepository.getReportById(reportId)).thenReturn(mockReport);
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
-        when(mockStatement.executeQuery(anyString())).thenReturn(mockResultSet);
+        when(repo.getReportById(reportId)).thenReturn(report);
+        when(con.createStatement()).thenReturn(stmt);
+        when(stmt.executeQuery(anyString())).thenReturn(rs);
 
-        // Act
-        reportService.runReport(reportId);
+        service.runReport(reportId);
 
-        // Assert
-        verify(mockRepository).getReportById(reportId);
-        verify(mockConnection).createStatement();
-        verify(mockStatement).executeQuery(mockReport.sql);
+        verify(repo).getReportById(reportId);
+        verify(con).createStatement();
+        verify(stmt).executeQuery(report.sql);
     }
 
     @Test
-    @DisplayName("Should handle invalid report ID gracefully")
-    void testRunReport_InvalidId() {
-        // Arrange
+    @DisplayName("Should handle invalid report ID")
+    void testRunReportInvalidId() {
+        // Test what happens when we try to run a report that doesn't exist
         int invalidReportId = 999;
-        when(mockRepository.getReportById(invalidReportId)).thenReturn(null);
+        when(repo.getReportById(invalidReportId)).thenReturn(null);
 
-        // Act
-        reportService.runReport(invalidReportId);
+        service.runReport(invalidReportId);
 
-        // Assert
-        verify(mockRepository).getReportById(invalidReportId);
-        verifyNoInteractions(mockConnection);
+        verify(repo).getReportById(invalidReportId);
+        verifyNoInteractions(con);
     }
 
     @Test
-    @DisplayName("Should retrieve all reports successfully")
-    void testGetAllReports_Success() {
-        // Arrange
+    @DisplayName("Should get all reports")
+    void testGetAllReports() {
+        // Test getting all reports through the service
         List<Report> expectedReports = new ArrayList<>();
         Report report1 = new Report();
         report1.id = 1;
@@ -102,85 +97,77 @@ class ReportServiceTest {
         report2.title = "Report 2";
         expectedReports.add(report2);
         
-        when(mockRepository.getAllReports()).thenReturn(expectedReports);
+        when(repo.getAllReports()).thenReturn(expectedReports);
 
-        // Act
-        List<Report> result = reportService.getAllReports();
+        List<Report> result = service.getAllReports();
 
-        // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals("Report 1", result.get(0).title);
         assertEquals("Report 2", result.get(1).title);
-        verify(mockRepository).getAllReports();
+        verify(repo).getAllReports();
     }
 
     @Test
-    @DisplayName("Should retrieve report by ID successfully")
-    void testGetReportById_Success() {
-        // Arrange
+    @DisplayName("Should get report by ID")
+    void testGetReportById() {
+        // Test getting a specific report through the service
         int reportId = 1;
         Report expectedReport = new Report();
         expectedReport.id = reportId;
         expectedReport.title = "Test Report";
         
-        when(mockRepository.getReportById(reportId)).thenReturn(expectedReport);
+        when(repo.getReportById(reportId)).thenReturn(expectedReport);
 
-        // Act
-        Report result = reportService.getReportById(reportId);
+        Report result = service.getReportById(reportId);
 
-        // Assert
         assertNotNull(result);
         assertEquals(reportId, result.id);
         assertEquals("Test Report", result.title);
-        verify(mockRepository).getReportById(reportId);
+        verify(repo).getReportById(reportId);
     }
 
     @Test
     @DisplayName("Should handle report with parameters")
-    void testRunReport_WithParameters() throws SQLException {
-        // Arrange
-        Report mockReport = new Report();
-        mockReport.id = 1;
-        mockReport.title = "Test Report";
-        mockReport.sql = "SELECT * FROM test WHERE region = '%region%'";
-        mockReport.parameterName = "region";
-        mockReport.parameterPrompt = "Please enter region";
+    void testRunReportWithParameters() throws SQLException {
+        // Test reports that need user input (like asking for a continent)
+        Report report = new Report();
+        report.id = 1;
+        report.title = "Test Report";
+        report.sql = "SELECT * FROM test WHERE region = '%region%'";
+        report.parameterName = "region";
+        report.parameterPrompt = "Please enter region";
         
-        when(mockRepository.getReportById(1)).thenReturn(mockReport);
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
-        when(mockStatement.executeQuery(anyString())).thenReturn(mockResultSet);
+        when(repo.getReportById(1)).thenReturn(report);
+        when(con.createStatement()).thenReturn(stmt);
+        when(stmt.executeQuery(anyString())).thenReturn(rs);
 
-        // Act
-        reportService.runReport(1);
+        service.runReport(1);
 
-        // Assert
-        verify(mockRepository).getReportById(1);
-        verify(mockConnection).createStatement();
-        verify(mockStatement).executeQuery(anyString());
+        verify(repo).getReportById(1);
+        verify(con).createStatement();
+        verify(stmt).executeQuery(anyString());
     }
 
     @Test
-    @DisplayName("Should handle SQL exception during report execution")
-    void testRunReport_SQLException() throws SQLException {
-        // Arrange
-        Report mockReport = new Report();
-        mockReport.id = 1;
-        mockReport.title = "Test Report";
-        mockReport.sql = "SELECT * FROM test";
-        mockReport.parameterName = "";
-        mockReport.parameterPrompt = "";
+    @DisplayName("Should handle database errors")
+    void testRunReportError() throws SQLException {
+        // Test what happens if there's a database error
+        Report report = new Report();
+        report.id = 1;
+        report.title = "Test Report";
+        report.sql = "SELECT * FROM test";
+        report.parameterName = "";
+        report.parameterPrompt = "";
         
-        when(mockRepository.getReportById(1)).thenReturn(mockReport);
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
-        when(mockStatement.executeQuery(anyString())).thenThrow(new SQLException("Database error"));
+        when(repo.getReportById(1)).thenReturn(report);
+        when(con.createStatement()).thenReturn(stmt);
+        when(stmt.executeQuery(anyString())).thenThrow(new SQLException("Database error"));
 
-        // Act
-        reportService.runReport(1);
+        service.runReport(1);
 
-        // Assert
-        verify(mockRepository).getReportById(1);
-        verify(mockConnection).createStatement();
-        verify(mockStatement).executeQuery(anyString());
+        verify(repo).getReportById(1);
+        verify(con).createStatement();
+        verify(stmt).executeQuery(anyString());
     }
 }

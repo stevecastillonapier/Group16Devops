@@ -18,113 +18,103 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit tests for the ReportRepository class.
- * These tests verify that the repository correctly handles database operations
- * for retrieving report definitions.
+ * Tests for the ReportRepository class.
+ * These tests check that the repository works correctly with the database.
  */
 @DisplayName("ReportRepository Tests")
 class ReportRepositoryTest {
 
     @Mock
-    private Connection mockConnection;
+    private Connection con;
     
     @Mock
-    private PreparedStatement mockPreparedStatement;
+    private PreparedStatement ps;
     
     @Mock
-    private ResultSet mockResultSet;
+    private ResultSet rs;
     
-    private ReportRepository reportRepository;
+    private ReportRepository repo;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        reportRepository = new ReportRepository(mockConnection);
+        repo = new ReportRepository(con);
     }
 
     @Test
-    @DisplayName("Should retrieve report by ID successfully")
-    void testGetReportById_Success() throws SQLException {
-        // Arrange
+    @DisplayName("Should get report by ID")
+    void testGetReportById() throws SQLException {
+        // Test getting a report by its ID
         int reportId = 1;
         String expectedTitle = "Test Report";
         String expectedSql = "SELECT * FROM test";
         
-        when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(true);
-        when(mockResultSet.getInt("id")).thenReturn(reportId);
-        when(mockResultSet.getString("title")).thenReturn(expectedTitle);
-        when(mockResultSet.getString("sql_query")).thenReturn(expectedSql);
-        when(mockResultSet.getString("parameter_name")).thenReturn("");
-        when(mockResultSet.getString("parameter_prompt")).thenReturn("");
+        when(con.prepareStatement(anyString())).thenReturn(ps);
+        when(ps.executeQuery()).thenReturn(rs);
+        when(rs.next()).thenReturn(true);
+        when(rs.getInt("id")).thenReturn(reportId);
+        when(rs.getString("title")).thenReturn(expectedTitle);
+        when(rs.getString("sql_query")).thenReturn(expectedSql);
+        when(rs.getString("parameter_name")).thenReturn("");
+        when(rs.getString("parameter_prompt")).thenReturn("");
 
-        // Act
-        Report result = reportRepository.getReportById(reportId);
+        Report result = repo.getReportById(reportId);
 
-        // Assert
         assertNotNull(result);
         assertEquals(reportId, result.id);
         assertEquals(expectedTitle, result.title);
         assertEquals(expectedSql, result.sql);
         
-        verify(mockPreparedStatement).setInt(1, reportId);
-        verify(mockPreparedStatement).executeQuery();
+        verify(ps).setInt(1, reportId);
+        verify(ps).executeQuery();
     }
 
     @Test
     @DisplayName("Should return null when report not found")
-    void testGetReportById_NotFound() throws SQLException {
-        // Arrange
+    void testGetReportByIdNotFound() throws SQLException {
+        // Test what happens when we ask for a report that doesn't exist
         int reportId = 999;
         
-        when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(false);
+        when(con.prepareStatement(anyString())).thenReturn(ps);
+        when(ps.executeQuery()).thenReturn(rs);
+        when(rs.next()).thenReturn(false);
 
-        // Act
-        Report result = reportRepository.getReportById(reportId);
+        Report result = repo.getReportById(reportId);
 
-        // Assert
         assertNull(result);
-        verify(mockPreparedStatement).setInt(1, reportId);
+        verify(ps).setInt(1, reportId);
     }
 
     @Test
-    @DisplayName("Should handle SQL exception gracefully")
-    void testGetReportById_SQLException() throws SQLException {
-        // Arrange
+    @DisplayName("Should handle database errors")
+    void testGetReportByIdError() throws SQLException {
+        // Test what happens if the database has problems
         int reportId = 1;
         
-        when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenThrow(new SQLException("Database error"));
+        when(con.prepareStatement(anyString())).thenReturn(ps);
+        when(ps.executeQuery()).thenThrow(new SQLException("Database error"));
 
-        // Act
-        Report result = reportRepository.getReportById(reportId);
+        Report result = repo.getReportById(reportId);
 
-        // Assert
         assertNull(result);
     }
 
     @Test
-    @DisplayName("Should retrieve all reports successfully")
-    void testGetAllReports_Success() throws SQLException {
-        // Arrange
-        when(mockConnection.createStatement()).thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(true, true, false);
+    @DisplayName("Should get all reports")
+    void testGetAllReports() throws SQLException {
+        // Test getting all reports from the database
+        when(con.createStatement()).thenReturn(ps);
+        when(ps.executeQuery()).thenReturn(rs);
+        when(rs.next()).thenReturn(true, true, false);
         
-        // First call to next() returns report1
-        when(mockResultSet.getInt("id")).thenReturn(1, 2);
-        when(mockResultSet.getString("title")).thenReturn("Report 1", "Report 2");
-        when(mockResultSet.getString("sql_query")).thenReturn("SELECT * FROM test1", "SELECT * FROM test2");
-        when(mockResultSet.getString("parameter_name")).thenReturn("", "");
-        when(mockResultSet.getString("parameter_prompt")).thenReturn("", "");
+        when(rs.getInt("id")).thenReturn(1, 2);
+        when(rs.getString("title")).thenReturn("Report 1", "Report 2");
+        when(rs.getString("sql_query")).thenReturn("SELECT * FROM test1", "SELECT * FROM test2");
+        when(rs.getString("parameter_name")).thenReturn("", "");
+        when(rs.getString("parameter_prompt")).thenReturn("", "");
 
-        // Act
-        List<Report> result = reportRepository.getAllReports();
+        List<Report> result = repo.getAllReports();
 
-        // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals("Report 1", result.get(0).title);
@@ -132,17 +122,15 @@ class ReportRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should return empty list when no reports found")
-    void testGetAllReports_EmptyResult() throws SQLException {
-        // Arrange
-        when(mockConnection.createStatement()).thenReturn(mockPreparedStatement);
-        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(false);
+    @DisplayName("Should return empty list when no reports")
+    void testGetAllReportsEmpty() throws SQLException {
+        // Test what happens when there are no reports
+        when(con.createStatement()).thenReturn(ps);
+        when(ps.executeQuery()).thenReturn(rs);
+        when(rs.next()).thenReturn(false);
 
-        // Act
-        List<Report> result = reportRepository.getAllReports();
+        List<Report> result = repo.getAllReports();
 
-        // Assert
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }

@@ -16,64 +16,61 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Integration tests for the ReportService and ReportRepository.
- * These tests verify that the components work together correctly
- * with a real database connection using Docker.
+ * Tests that use the real Docker database.
+ * These tests check that our app actually works with the real database.
  * 
- * IMPORTANT: These tests require the Docker database to be running!
+ * IMPORTANT: These tests need the Docker database to be running!
  * Run: docker-compose up -d
  */
 @DisplayName("Integration Tests - Real Database")
 class IntegrationTest {
 
-    private Connection connection;
-    private ReportRepository reportRepository;
-    private ReportService reportService;
+    private Connection con;
+    private ReportRepository repo;
+    private ReportService service;
 
     @BeforeEach
     void setUp() throws SQLException {
         // Try to connect to the Docker database
         try {
-            connection = DriverManager.getConnection(
+            con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/world?useSSL=false&allowPublicKeyRetrieval=true", 
                 "root", 
                 "example"
             );
             
-            reportRepository = new ReportRepository(connection);
-            reportService = new ReportService(connection, reportRepository);
+            repo = new ReportRepository(con);
+            service = new ReportService(con, repo);
             
             System.out.println("✅ Connected to Docker database successfully");
         } catch (SQLException e) {
             System.out.println("⚠️ Could not connect to Docker database - skipping integration tests");
             System.out.println("   Make sure to run: docker-compose up -d");
-            connection = null;
+            con = null;
         }
     }
 
     @AfterEach
     void tearDown() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            connection.close();
+        if (con != null && !con.isClosed()) {
+            con.close();
         }
     }
 
     @Test
-    @DisplayName("Should retrieve all reports from Docker database")
-    void testGetAllReports_Integration() {
-        if (connection == null) {
+    @DisplayName("Should get all reports from Docker database")
+    void testGetAllReports() {
+        if (con == null) {
             System.out.println("Skipping test - no database connection");
             return;
         }
         
-        // Act
-        List<Report> reports = reportService.getAllReports();
+        List<Report> reports = service.getAllReports();
 
-        // Assert
         assertNotNull(reports);
         assertTrue(reports.size() > 0, "Should have at least one report in database");
         
-        // Verify first report has required fields
+        // Check first report has required fields
         Report firstReport = reports.get(0);
         assertNotNull(firstReport.title);
         assertNotNull(firstReport.sql);
@@ -83,17 +80,15 @@ class IntegrationTest {
     }
 
     @Test
-    @DisplayName("Should retrieve specific report by ID from Docker database")
-    void testGetReportById_Integration() {
-        if (connection == null) {
+    @DisplayName("Should get specific report by ID from Docker database")
+    void testGetReportById() {
+        if (con == null) {
             System.out.println("Skipping test - no database connection");
             return;
         }
         
-        // Act
-        Report report = reportService.getReportById(1);
+        Report report = service.getReportById(1);
 
-        // Assert
         assertNotNull(report);
         assertEquals(1, report.id);
         assertNotNull(report.title);
@@ -103,33 +98,29 @@ class IntegrationTest {
     }
 
     @Test
-    @DisplayName("Should handle non-existent report ID gracefully")
-    void testGetReportById_NonExistent() {
-        if (connection == null) {
+    @DisplayName("Should handle non-existent report ID")
+    void testGetReportByIdNotFound() {
+        if (con == null) {
             System.out.println("Skipping test - no database connection");
             return;
         }
         
-        // Act
-        Report report = reportService.getReportById(99999);
+        Report report = service.getReportById(99999);
 
-        // Assert
         assertNull(report);
         System.out.println("✅ Correctly handled non-existent report ID");
     }
 
     @Test
     @DisplayName("Should verify Docker database has all required reports")
-    void testDatabaseHasAllRequiredReports() {
-        if (connection == null) {
+    void testDatabaseHasAllReports() {
+        if (con == null) {
             System.out.println("Skipping test - no database connection");
             return;
         }
         
-        // Act
-        List<Report> reports = reportService.getAllReports();
+        List<Report> reports = service.getAllReports();
 
-        // Assert
         assertNotNull(reports);
         assertTrue(reports.size() >= 32, "Database should have at least 32 reports for coursework requirements");
         
