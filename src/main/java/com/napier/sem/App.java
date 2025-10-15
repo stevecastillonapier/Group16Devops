@@ -55,7 +55,7 @@ public class App {
         // Disconnect from database at the end of execution
         a.disconnect();
 
-        System.out.println("Goodbye!");
+        System.out.println("!!!!!Have a great day and thank you for using World Data Explorer!!!!!");
 
     }//end of main
 

@@ -87,6 +87,11 @@ public class ReportMenu {
                     // Delegate execution to the ReportService
                     // Call method to execute report SQL and display results
                     reportService.runReport(selectedReport);
+
+                    // Wait for user input so the report output can be viewed before the menu reappears
+                    System.out.println("\nPress ENTER to return to the main menu...");
+                    sc.nextLine();
+
                 } else {
 
                     // Input was a valid number, but no matching report was found
