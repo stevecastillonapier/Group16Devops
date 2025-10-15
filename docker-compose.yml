@@ -5,10 +5,12 @@ services:
     build: .
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
 
   # db is is db folder
   db:
     build: db/.
-    #ports:
-     # - 3306:3306
+    ports:
+      - 3306:3306
     restart: always

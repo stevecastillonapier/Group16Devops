@@ -86,9 +86,16 @@ public class App {
             {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
+                
+                // Determine database host based on environment
+                String dbHost = System.getenv("DB_HOST");
+                if (dbHost == null) {
+                    dbHost = "localhost"; // Default for local development
+                }
+                
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "CRGroup16");
-                //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
+                String connectionString = "jdbc:mysql://" + dbHost + ":3306/world?useSSL=false&allowPublicKeyRetrieval=true";
+                con = DriverManager.getConnection(connectionString, "root", "CRGroup16");
                 System.out.println("Successfully connected");
                 break;
             }
