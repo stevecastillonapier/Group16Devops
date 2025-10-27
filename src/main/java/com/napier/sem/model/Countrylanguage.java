@@ -6,16 +6,16 @@ package com.napier.sem.model;
 public class Countrylanguage {
 
     //3-letter code referencing the Country table
-    public String countryCode;
+    private String countryCode;
 
     //The name of the language spoken in the country.
-    public String language;
+    private String language;
 
     //Indicates whether the language is official in the country ('T' for True, 'F' for False).
-    public String isOfficial;
+    private String isOfficial;
 
     //The percentage of the country's population that speaks this language.
-    public double percentage;
+    private double percentage;
 
     /**
      * Full constructor for initializing all fields.
