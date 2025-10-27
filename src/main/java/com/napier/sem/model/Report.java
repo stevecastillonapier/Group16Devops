@@ -11,19 +11,19 @@ import java.util.Objects;
 public class Report {
 
     //Report unique identifier (Primary Key).
-    public int id;
+    private int id;
 
     //User-friendly title for the report.
-    public String title;
+    private String title;
 
     //The SQL template to be executed (may contain placeholders like %param%).
-    public String sql;
+    private String sql;
 
     //The name of the parameter expected by the SQL query (e.g. "region"). Optional.
-    public String parameterName;
+    private String parameterName;
 
     //The prompt text displayed to the user to request the parameter value (e.g. "Please enter region:"). Optional.
-    public String parameterPrompt;   // optional (e.g. "Please enter region:")
+    private String parameterPrompt;   // optional (e.g. "Please enter region:")
 
     /**
      * Default no-argument constructor.
