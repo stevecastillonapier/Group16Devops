@@ -54,12 +54,14 @@ public class ReportService {
      */
     public void runReport(Report report) {
         try {
-            String sql = report.sql;
+            //String sql = report.sql;
+            String sql = report.getSql();
             Scanner sc = new Scanner(System.in);
 
             // Handle continent parameter if it exists
             if (sql.contains("%continent%")) {
-                System.out.print(report.parameterPrompt + ": ");
+                //System.out.print(report.parameterPrompt + ": ");
+                System.out.print(report.getParameterPrompt() + ": ");
                 String continent = sc.nextLine();
                 sql = sql.replace("%continent%", continent);
             }
@@ -72,11 +74,11 @@ public class ReportService {
             }
 
             // Handle other single parameters
-            if (report.parameterName != null && !report.parameterName.isEmpty() && 
-                !report.parameterName.equals("continent") && !report.parameterName.equals("n")) {
-                System.out.print(report.parameterPrompt + ": ");
+            if (report.getParameterName() != null && !report.getParameterName().isEmpty() &&
+                !report.getParameterName().equals("continent") && !report.getParameterName().equals("n")) {
+                System.out.print(report.getParameterPrompt() + ": ");
                 String value = sc.nextLine();
-                sql = sql.replace("%" + report.parameterName + "%", value);
+                sql = sql.replace("%" + report.getParameterName() + "%", value);
             }
 
             Statement stmt = con.createStatement();
@@ -84,7 +86,7 @@ public class ReportService {
             ResultSet rs = stmt.executeQuery(sql);
 
             //Loading the report and preparing the output
-            System.out.println("\n=== " + report.title + " ===");
+            System.out.println("\n=== " + report.getTitle() + " ===");
             TablePrinter.printResultSet(rs);
 
         } catch (Exception e) {
