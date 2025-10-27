@@ -7,73 +7,73 @@ package com.napier.sem.model;
 public class Country {
 
     //Country Code (Primary Key, usually 3 letters).
-    public String Code;
+    private String code;
 
     //Name of the country.
-    public String Name;
+    private String name;
 
     //Continent the country belongs to.
-    public String Continent;
+    private String continent;
 
     //Region within the continent.
-    public String Region;
+    private String region;
 
     //Total surface area of the country.
-    public double SurfaceArea;
+    private double surfaceArea;
 
     //Year of independence.
-    public Integer IndepYear;
+    private Integer indepYear;
 
     //Total population of the country.
-    public int Population;
+    private int population;
     
     //Life Expectancy.
-    public Double LifeExpectancy;
+    private Double lifeExpectancy;
 
     //Gross National Product (GNP).
-    public Double GNP;
+    private Double gNP;
 
     //Old Gross National Product (GNP)
-    public Double GNPOld;
+    private Double gNPOld;
 
     //Local name of the country.
-    public String LocalName;
+    private String localName;
 
     //Type of government form
-    public String GovernmentForm;
+    private String governmentForm;
 
     //Name of the Head of State.
-    public String HeadOfState;
+    private String headOfState;
 
     //ID of the capital city
-    public Integer Capital;
+    private Integer capital;
 
     //Secondary country code
-    public String Code2;
+    private String code2;
 
     //The name of the capital city
-    public String CapitalName;
+    private String capitalName;
 
     /**
      * Full constructor for initializing all fields.
      */
     public Country(String code, String name, String continent, String region, double surfaceArea, Integer indepYear, int population, Double lifeExpectancy, Double GNP, Double GNPOld, String localName, String governmentForm, String headOfState, Integer capital, String code2, String capitalName) {
-        Code = code;
-        Name = name;
-        Continent = continent;
-        Region = region;
-        SurfaceArea = surfaceArea;
-        IndepYear = indepYear;
-        Population = population;
-        LifeExpectancy = lifeExpectancy;
-        this.GNP = GNP;
-        this.GNPOld = GNPOld;
-        LocalName = localName;
-        GovernmentForm = governmentForm;
-        HeadOfState = headOfState;
-        Capital = capital;
-        Code2 = code2;
-        CapitalName = capitalName;
+        code = code;
+        name = name;
+        continent = continent;
+        region = region;
+        surfaceArea = surfaceArea;
+        indepYear = indepYear;
+        population = population;
+        lifeExpectancy = lifeExpectancy;
+        this.gNP = GNP;
+        this.gNPOld = GNPOld;
+        localName = localName;
+        governmentForm = governmentForm;
+        headOfState = headOfState;
+        capital = capital;
+        code2 = code2;
+        capitalName = capitalName;
     }
 
     /**
@@ -83,67 +83,67 @@ public class Country {
     }
 
     public String getCode() {
-        return Code;
+        return code;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getContinent() {
-        return Continent;
+        return continent;
     }
 
     public String getRegion() {
-        return Region;
+        return region;
     }
 
     public double getSurfaceArea() {
-        return SurfaceArea;
+        return surfaceArea;
     }
 
     public Integer getIndepYear() {
-        return IndepYear;
+        return indepYear;
     }
 
     public int getPopulation() {
-        return Population;
+        return population;
     }
 
     public Double getLifeExpectancy() {
-        return LifeExpectancy;
+        return lifeExpectancy;
     }
 
     public Double getGNP() {
-        return GNP;
+        return gNP;
     }
 
     public Double getGNPOld() {
-        return GNPOld;
+        return gNPOld;
     }
 
     public String getLocalName() {
-        return LocalName;
+        return localName;
     }
 
     public String getGovernmentForm() {
-        return GovernmentForm;
+        return governmentForm;
     }
 
     public String getHeadOfState() {
-        return HeadOfState;
+        return headOfState;
     }
 
     public Integer getCapital() {
-        return Capital;
+        return capital;
     }
 
     public String getCode2() {
-        return Code2;
+        return code2;
     }
 
     public String getCapitalName() {
-        return CapitalName;
+        return capitalName;
     }
 
     /**
@@ -153,22 +153,22 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "Code='" + Code + '\'' +
-                ", Name='" + Name + '\'' +
-                ", Continent='" + Continent + '\'' +
-                ", Region='" + Region + '\'' +
-                ", SurfaceArea=" + SurfaceArea +
-                ", IndepYear=" + IndepYear +
-                ", Population=" + Population +
-                ", LifeExpectancy=" + LifeExpectancy +
-                ", GNP=" + GNP +
-                ", GNPOld=" + GNPOld +
-                ", LocalName='" + LocalName + '\'' +
-                ", GovernmentForm='" + GovernmentForm + '\'' +
-                ", HeadOfState='" + HeadOfState + '\'' +
-                ", Capital=" + Capital +
-                ", Code2='" + Code2 + '\'' +
-                ", CapitalName='" + CapitalName + '\'' +
+                "Code='" + code + '\'' +
+                ", Name='" + name + '\'' +
+                ", Continent='" + continent + '\'' +
+                ", Region='" + region + '\'' +
+                ", SurfaceArea=" + surfaceArea +
+                ", IndepYear=" + indepYear +
+                ", Population=" + population +
+                ", LifeExpectancy=" + lifeExpectancy +
+                ", GNP=" + gNP +
+                ", GNPOld=" + gNPOld +
+                ", LocalName='" + localName + '\'' +
+                ", GovernmentForm='" + governmentForm + '\'' +
+                ", HeadOfState='" + headOfState + '\'' +
+                ", Capital=" + capital +
+                ", Code2='" + code2 + '\'' +
+                ", CapitalName='" + capitalName + '\'' +
                 '}';
     }
 }
