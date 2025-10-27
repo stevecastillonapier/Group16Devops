@@ -6,19 +6,19 @@ package com.napier.sem.model;
 public class City {
 
     //City ID (Primary Key)
-    public int ID;
+    private int id;
 
     //Name of the city
-    public String Name;
+    private String name;
 
     //3-letter country code that references the country table
-    public String CountryCode;
+    private String countryCode;
 
     //District or region the city belongs to
-    public String District;
+    private String district;
 
     //Population of the city
-    public int Population;
+    private int population;
 
     /**
      * Constructor for the City model.
@@ -29,11 +29,11 @@ public class City {
      * @param population The total population.
      */
     public City(int ID, String name, String countryCode, String district, int population) {
-        this.ID = ID;
-        Name = name;
-        CountryCode = countryCode;
-        District = district;
-        Population = population;
+        this.id = ID;
+        name = name;
+        countryCode = countryCode;
+        district = district;
+        population = population;
     }
 
     /**
@@ -41,7 +41,7 @@ public class City {
      * @return The ID.
      */
     public int getID() {
-        return ID;
+        return id;
     }
 
     /**
@@ -49,7 +49,7 @@ public class City {
      * @return The Name.
      */
     public String getName() {
-        return Name;
+        return name;
     }
 
     /**
@@ -57,7 +57,7 @@ public class City {
      * @return The CountryCode.
      */
     public String getCountryCode() {
-        return CountryCode;
+        return countryCode;
     }
 
     /**
@@ -65,7 +65,7 @@ public class City {
      * @return The District.
      */
     public String getDistrict() {
-        return District;
+        return district;
     }
 
     /**
@@ -73,7 +73,7 @@ public class City {
      * @return The Population.
      */
     public int getPopulation() {
-        return Population;
+        return population;
     }
 
     /**
@@ -83,11 +83,11 @@ public class City {
     @Override
     public String toString() {
         return "City{" +
-                "ID=" + ID +
-                ", Name='" + Name + '\'' +
-                ", CountryCode='" + CountryCode + '\'' +
-                ", District='" + District + '\'' +
-                ", Population=" + Population +
+                "ID=" + id +
+                ", Name='" + name + '\'' +
+                ", CountryCode='" + countryCode + '\'' +
+                ", District='" + district + '\'' +
+                ", Population=" + population +
                 '}';
     }
 }
