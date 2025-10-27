@@ -76,11 +76,16 @@ public class ReportRepository {
         Report report = new Report();
 
         // Data extraction using database column names
-        report.id = rs.getInt("id");
-        report.title = rs.getString("title");
-        report.sql = rs.getString("sql_query");
-        report.parameterName = rs.getString("parameter_name");
-        report.parameterPrompt = rs.getString("parameter_prompt");
+        //report.id = rs.getInt("id");
+        report.setId(rs.getInt("id"));
+        //report.title = rs.getString("title");
+        report.setTitle(rs.getString("title"));
+        //report.sql = rs.getString("sql_query");
+        report.setSql(rs.getString("sql_query"));
+        //report.parameterName = rs.getString("parameter_name");
+        report.setParameterName(rs.getString("parameter_name"));
+        report.setParameterPrompt(rs.getString("parameter_prompt"));
+        //report.parameterPrompt = rs.getString("parameter_prompt");
 
         return report;
     }
