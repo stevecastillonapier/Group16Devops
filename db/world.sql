@@ -5445,127 +5445,38 @@ CREATE TABLE `reports` (
                            `parameter_prompt` VARCHAR(255)
 );
 
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All the countries in the world organised by largest population to smallest', 'select Code, Name, Continent, Region, Population, (select Name from city where ID=country.capital) as Capital from country order by Population desc', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All cities in a specific country, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where country.Name  =''%country%''
-        order by city.Population desc', 'country', 'Please enter a country eg. United States');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All cities in a specific district, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where city.District= ''%district%''
-        order by city.Population desc', 'district', 'Please enter a district eg. Limburg');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('The top (N) populated cities in the world', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        order by city.Population desc
-        limit %n%', 'n', 'Please enter the number of rows to return (N)');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated cities in a specific continent', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where country.Continent = ''%continent%''
-        order by city.Population desc
-        limit %n%', 'continent', 'Please enter a continent');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated cities in a specific region', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where country.Region = ''%region%''
-        order by city.Population desc
-        limit %n%', 'region', 'Please enter a region eg. Caribbean');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated cities in a specific country', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where country.Name = ''%country%''
-        order by city.Population desc
-        limit %n%', 'country', 'Please enter a country eg. Brazil');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated cities in a specific district', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where city.District  = ''%district%''
-        order by city.Population desc
-        limit %n%', 'district', 'Please enter a district eg. Limburg');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Sorted list of all capital cities in the world, organized by population from largest to smallest\nNOTE: New Delhi population in DB is incorrect)', 'select city.Name, country.Name as Country, city.Population  from city inner join country  on city.CountryCode = country.Code
-        and country.Capital = city.ID
-        order by city.Population desc', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All capital cities in a specific continent, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.Population  from city inner join country on country.Capital = city.ID
-        and country.Continent = ''%continent%''
-        order by city.Population desc', 'continent', 'Please enter a continent eg. South America');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All capital cities in a specific region, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.Population  from city inner join country  on country.Capital = city.ID
-        and country.Region = ''%region%''
-        order by city.Population desc', 'region', 'Please enter a region eg. Polynesia');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All the countries in a continent organised by largest population to smallest', 'select Code, Name, Continent, Region, Population, (select Name from city where ID=country.Capital) as Capital from country where Continent="%continent%" order by Population desc', 'continent', 'Please enter a continent eg. Europe');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated capital cities in the world', 'select city.Name, country.Name as Country, city.Population  from city inner join country  on country.Capital = city.ID
-        order by city.Population desc
-        limit %n%', 'n', 'Please enter the number of rows to return (N)');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated capital cities in a specific continent', 'select city.Name, country.Name as Country, city.Population  from city inner join country  on country.Capital = city.ID
-        where country.Continent = ''%continent%''
-        order by city.Population desc
-        limit %n%', 'continent', 'Please enter a continent eg. Oceania');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated capital cities in a region', 'select city.Name, country.Name as Country, city.Population  from city inner join country  on country.Capital = city.ID
-        where country.Region = ''%region%''
-        order by city.Population desc
-        limit %n%', 'region', 'Please enter a region eg. Central America');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of people living in cities, and not living in cities, on each continent', 'select Continent , sum(Population) as TotalPopulation,
-        (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent) as UrbanPopulation,
-        round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)/sum(Population)*100,2) as `UrbanPopulation%`,
-        (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)) as RuralPopulation,
-        round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent))/sum(Population)*100),2) as `RuralPopulation%`
-        from country c group by Continent', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of people living in cities, and not living in cities, on each region', 'select Region , sum(Population) as TotalPopulation,
-        (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region) as UrbanPopulation,
-        round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)/sum(Population)*100,2) as `UrbanPopulation%`,
-        (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)) as RuralPopulation,
-        round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region))/sum(Population)*100),2) as `RuralPopulation%`
-        from country c group by Region', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of people living in cities, and not living in cities, in each country', 'select Name as Country , sum(Population) as TotalPopulation,
-        (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name) as UrbanPopulation,
-        round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name)/sum(Population)*100,2) as `UrbanPopulation%`,
-        (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name)) as RuralPopulation,
-        round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name))/sum(Population)*100),2) as `RuralPopulation%`
-        from country c group by Name', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of the world', 'select sum(Population) as TotalPopulation,
-        (select sum(city.Population) from city) as UrbanPopulation,
-        round((select sum(city.Population) from city)/sum(Population)*100,2) as `UrbanPopulation%`,
-        (sum(c.Population) - (select sum(city.Population) from city)) as RuralPopulation,
-        round((select(sum(c.Population) - (select sum(city.Population) from city ))/sum(Population)*100),2) as `RuralPopulation%`
-        from country c', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of a continent', 'select Continent as Continent , sum(Population) as TotalPopulation,
-        (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent) as UrbanPopulation,
-        round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)/sum(Population)*100,2) as `UrbanPopulation%`,
-        (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)) as RuralPopulation,
-        round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent))/sum(Population)*100),2) as `RuralPopulation%`
-        from country c where c.Continent  = ''%continent%''', 'continent', 'Please enter a continent eg. Africa');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of a region', 'select Region as Region , sum(Population) as TotalPopulation,
-        (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region) as UrbanPopulation,
-        round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)/sum(Population)*100,2) as `UrbanPopulation%`,
-        (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)) as RuralPopulation,
-        round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region))/sum(Population)*100),2) as `RuralPopulation%`
-        from country c where c.Region  = ''%region%''', 'region', 'Please enter a region eg. Melanesia');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of a country', 'select c.Name as Country , c.Population as TotalPopulation , (select sum(population) from city where countryCode=c.Code) UrbanPopulation,
-        round(((select sum(population) from city where countryCode=c.Code)/c.Population)*100,1) as `UrbanPopulation%`,
-        (c.Population - (select sum(population) from city where countryCode=c.Code)) as RuralPopulation,
-        round(((c.Population - (select sum(population) from city where countryCode=c.Code))/c.Population)*100,1) as `RuralPopulation%`
-        from country c inner join city cty on c.Capital =cty.ID
-        where c.Name=''%country%''', 'country', 'Please enter a country eg. Belgium');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All the countries within a specific region', 'select country.Code , country.Name, country.Continent, country.Region, country.Population, city.Name as Capital from country inner join city on country.Capital  = city.ID
-        where country.Region =''%region%''', 'region', 'Please enter a region eg. Caribbean');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of a district', 'select District as District , sum(Population) as TotalPopulation , sum(Population) as UrbanPopulation,
-        ''100%'' as `UrbanPopulation%`,
-        ''0'' as RuralPopulation,
-        ''0%'' as `RuralPopulation%`
-        from city
-        where District=''%district%''
-        group by district', 'district', 'Please enter a district eg. Limburg');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Population of a city', 'select cty.Name as Name, c.Name as Country, cty.District as District, cty.Population as Population from city cty inner join country c on cty.CountryCode = c.Code
-        where cty.Name = ''%city%'';', 'city', 'Please enter a city eg. Georgetown');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('The number of people who speak Chinese, English, Hindi, Spanish, and Arabic', 'select cl.`Language`, round(sum(c.Population*(cl.Percentage/100))) as Population,
-        round((sum(c.Population*(cl.Percentage/100)))/(select sum(population) from country c )*100,2) as Percentage
-        from countrylanguage cl inner join
-        country c on cl.CountryCode =c.Code
-        where cl.`Language` in (''Chinese'',''English'',''Hindi'',''Spanish'',''Arabic'')
-        and cl.Percentage >0
-        group by cl.`Language`
-        order by Population desc', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top (N) populated countries in the world', 'select country.Code , country.Name, country.Continent, country.Region, country.Population, city.Name as Capital from country inner join city on country.Capital  = city.ID
-        order by country.Population desc limit %n%', 'n', 'Please enter the number of rows to return (N)');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('Top N populated countries in a specific continent', 'select country.Code , country.Name, country.Continent, country.Region, country.Population, city.Name as Capital
-        from country inner join city on country.Capital  = city.ID
-        where country.Continent = ''%continent%''
-        order by country.Population desc limit %n%', 'continent', 'Please enter the continent eg. South America');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('The top N populated countries in a region', 'SELECT Code, Name, Continent, Region, Population, (select Name from city where id=country.Capital) as Capital
-        FROM country WHERE region = "%region%" ORDER BY Population DESC LIMIT %n%', 'region', 'Please enter the region eg. Caribbean');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All cities in the world, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        order by city.Population desc', '', '');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All cities in a specific continent, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where country.Continent =''%continent%''
-        order by city.Population desc', 'continent', 'Please enter a continent eg. Europe');
-INSERT INTO `reports` (`title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES ('All cities in a specific region, organized by population from largest to smallest', 'select city.Name, country.Name as Country, city.District , city.Population  from city inner join country  on city.CountryCode = country.Code
-        where country.Region  =''%region%''
-        order by city.Population desc', 'region', 'Please enter a region eg. Caribbean');
+INSERT INTO `reports` (`id`, `title`, `sql_query`, `parameter_name`, `parameter_prompt`) VALUES
+(1, 'All the countries in the world organised by largest population to smallest', 'select Code, Name, Continent, Region, Population, (select Name from city where ID=country.capital) as Capital from country order by Population desc', '', ''),
+(2, 'All the countries in a continent organised by largest population to smallest', 'select Code, Name, Continent, Region, Population, (select Name from city where ID=country.Capital) as Capital from country where Continent="%continent%" order by Population desc', 'continent', 'Please enter a continent eg. Europe'),
+(3, 'All the countries in a region organised by largest population to smallest', 'select country.Code , country.Name, country.Continent, country.Region, country.Population, city.Name as Capital from country inner join city on country.Capital  = city.ID where country.Region =''%region%''', 'region', 'Please enter a region eg. Caribbean'),
+(4, 'The top N populated countries in the world', 'select country.Code , country.Name, country.Continent, country.Region, country.Population, city.Name as Capital from country inner join city on country.Capital  = city.ID order by country.Population desc limit %n%', 'n', 'Please enter the number of rows to return (N)'),
+(5, 'The top N populated countries in a continent', 'select country.Code , country.Name, country.Continent, country.Region, country.Population, city.Name as Capital from country inner join city on country.Capital  = city.ID where country.Continent = ''%continent%'' order by country.Population desc limit %n%', 'continent', 'Please enter the continent eg. South America'),
+(6, 'The top N populated countries in a region', 'SELECT Code, Name, Continent, Region, Population, (select Name from city where id=country.Capital) as Capital FROM country WHERE region = "%region%" ORDER BY Population DESC LIMIT %n%', 'region', 'Please enter the region eg. Caribbean'),
+(7, 'All the cities in the world organised by largest population to smallest', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code order by city.Population desc', '', ''),
+(8, 'All the cities in a continent organised by largest population to smallest', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where country.Continent =''%continent%'' order by city.Population desc', 'continent', 'Please enter a continent eg. Europe'),
+(9, 'All the cities in a region organised by largest population to smallest', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where country.Region  =''%region%'' order by city.Population desc', 'region', 'Please enter a region eg. Caribbean'),
+(10, 'All the cities in a country organised by largest population to smallest', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where country.Name  =''%country%'' order by city.Population desc', 'country', 'Please enter a country eg. United States'),
+(11, 'All the cities in a district organised by largest population to smallest', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where city.District= ''%district%'' order by city.Population desc', 'district', 'Please enter a district eg. Limburg'),
+(12, 'The top N populated cities in the world', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code order by city.Population desc limit %n%', 'n', 'Please enter the number of rows to return (N)'),
+(13, 'The top N populated cities in a continent', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where country.Continent = ''%continent%'' order by city.Population desc limit %n%', 'continent', 'Please enter a continent'),
+(14, 'The top N populated cities in a region', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where country.Region = ''%region%'' order by city.Population desc limit %n%', 'region', 'Please enter a region eg. Caribbean'),
+(15, 'The top N populated cities in a country', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where country.Name = ''%country%'' order by city.Population desc limit %n%', 'country', 'Please enter a country eg. Brazil'),
+(16, 'The top N populated cities in a district', 'select city.Name, country.Name as Country, city.District , city.Population from city inner join country on city.CountryCode = country.Code where city.District  = ''%district%'' order by city.Population desc limit %n%', 'district', 'Please enter a district eg. Limburg'),
+(17, 'All the capital cities in the world organised by largest population to smallest', 'select city.Name, country.Name as Country, city.Population from city inner join country on city.CountryCode = country.Code and country.Capital = city.ID order by city.Population desc', '', ''),
+(18, 'All the capital cities in a continent organised by largest population to smallest', 'select city.Name, country.Name as Country, city.Population from city inner join country on country.Capital = city.ID and country.Continent = ''%continent%'' order by city.Population desc', 'continent', 'Please enter a continent eg. South America'),
+(19, 'All the capital cities in a region organised by largest population to smallest', 'select city.Name, country.Name as Country, city.Population from city inner join country on country.Capital = city.ID and country.Region = ''%region%'' order by city.Population desc', 'region', 'Please enter a region eg. Polynesia'),
+(20, 'The top N populated capital cities in the world', 'select city.Name, country.Name as Country, city.Population from city inner join country on country.Capital = city.ID order by city.Population desc limit %n%', 'n', 'Please enter the number of rows to return (N)'),
+(21, 'The top N populated capital cities in a continent', 'select city.Name, country.Name as Country, city.Population from city inner join country on country.Capital = city.ID where country.Continent = ''%continent%'' order by city.Population desc limit %n%', 'continent', 'Please enter a continent eg. Oceania'),
+(22, 'The top N populated capital cities in a region', 'select city.Name, country.Name as Country, city.Population from city inner join country on country.Capital = city.ID where country.Region = ''%region%'' order by city.Population desc limit %n%', 'region', 'Please enter a region eg. Central America'),
+(23, 'The population of people, people living in cities, and people not living in cities in each continent', 'select Continent , sum(Population) as TotalPopulation, (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent) as UrbanPopulation, round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)/sum(Population)*100,2) as `UrbanPopulation%`, (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)) as RuralPopulation, round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent))/sum(Population)*100),2) as `RuralPopulation%` from country c group by Continent', '', ''),
+(24, 'The population of people, people living in cities, and people not living in cities in each region', 'select Region , sum(Population) as TotalPopulation, (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region) as UrbanPopulation, round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)/sum(Population)*100,2) as `UrbanPopulation%`, (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)) as RuralPopulation, round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region))/sum(Population)*100),2) as `RuralPopulation%` from country c group by Region', '', ''),
+(25, 'The population of people, people living in cities, and people not living in cities in each country', 'select Name as Country , sum(Population) as TotalPopulation, (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name) as UrbanPopulation, round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name)/sum(Population)*100,2) as `UrbanPopulation%`, (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name)) as RuralPopulation, round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Name=c.Name))/sum(Population)*100),2) as `RuralPopulation%` from country c group by Name', '', ''),
+(26, 'The population of the world', 'select sum(Population) as TotalPopulation, (select sum(city.Population) from city) as UrbanPopulation, round((select sum(city.Population) from city)/sum(Population)*100,2) as `UrbanPopulation%`, (sum(c.Population) - (select sum(city.Population) from city)) as RuralPopulation, round((select(sum(c.Population) - (select sum(city.Population) from city ))/sum(Population)*100),2) as `RuralPopulation%` from country c', '', ''),
+(27, 'The population of a continent', 'select Continent as Continent , sum(Population) as TotalPopulation, (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent) as UrbanPopulation, round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)/sum(Population)*100,2) as `UrbanPopulation%`, (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent)) as RuralPopulation, round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Continent=c.Continent))/sum(Population)*100),2) as `RuralPopulation%` from country c where c.Continent  = ''%continent%''', 'continent', 'Please enter a continent eg. Africa'),
+(28, 'The population of a region', 'select Region as Region , sum(Population) as TotalPopulation, (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region) as UrbanPopulation, round((select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)/sum(Population)*100,2) as `UrbanPopulation%`, (sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region)) as RuralPopulation, round((select(sum(c.Population) - (select sum(city.Population) from city inner join country on city.CountryCode = country.Code where country.Region=c.Region))/sum(Population)*100),2) as `RuralPopulation%` from country c where c.Region  = ''%region%''', 'region', 'Please enter a region eg. Melanesia'),
+(29, 'The population of a country', 'select c.Name as Country , c.Population as TotalPopulation , (select sum(population) from city where countryCode=c.Code) UrbanPopulation, round(((select sum(population) from city where countryCode=c.Code)/c.Population)*100,1) as `UrbanPopulation%`, (c.Population - (select sum(population) from city where countryCode=c.Code)) as RuralPopulation, round(((c.Population - (select sum(population) from city where countryCode=c.Code))/c.Population)*100,1) as `RuralPopulation%` from country c inner join city cty on c.Capital =cty.ID where c.Name=''%country%''', 'country', 'Please enter a country eg. Belgium'),
+(30, 'The population of a district', 'select District as District , sum(Population) as TotalPopulation , sum(Population) as UrbanPopulation, ''100%'' as `UrbanPopulation%`, ''0'' as RuralPopulation, ''0%'' as `RuralPopulation%` from city where District=''%district%'' group by district', 'district', 'Please enter a district eg. Limburg'),
+(31, 'The population of a city', 'select cty.Name as Name, c.Name as Country, cty.District as District, cty.Population as Population from city cty inner join country c on cty.CountryCode = c.Code where cty.Name = ''%city%'';', 'city', 'Please enter a city eg. Georgetown'),
+(32, 'The number of people who speak Chinese, English, Hindi, Spanish, and Arabic', 'select cl.`Language`, round(sum(c.Population*(cl.Percentage/100))) as Population, round((sum(c.Population*(cl.Percentage/100)))/(select sum(population) from country c )*100,2) as Percentage from countrylanguage cl inner join country c on cl.CountryCode =c.Code where cl.`Language` in (''Chinese'',''English'',''Hindi'',''Spanish'',''Arabic'') and cl.Percentage >0 group by cl.`Language` order by Population desc', '', ''),
+(33, 'Report1', 'SELECT * FROM country LIMIT 10', '', ''),
+(34, 'Report2', 'SELECT * FROM city LIMIT 10', '', '');
