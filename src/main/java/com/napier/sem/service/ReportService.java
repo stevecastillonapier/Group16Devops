@@ -22,6 +22,9 @@ public class ReportService {
     //The active JDBC connection, used here for executing the dynamic SQL queries.
     private final ReportRepository repo;
 
+    private final Scanner input;
+
+
     /**
      * Constructor for the ReportService.
      * @param con The active database connection.
@@ -30,6 +33,13 @@ public class ReportService {
     public ReportService(Connection con, ReportRepository repo) {
         this.con = con;
         this.repo = repo;
+        this.input = new Scanner(System.in); //ensures initialization
+    }
+
+    public ReportService(ReportRepository repo, Connection con, Scanner input) {
+        this.repo = repo;
+        this.con = con;
+        this.input = input;
     }
 
     /**
@@ -54,19 +64,19 @@ public class ReportService {
      */
     public void runReport(Report report) {
         try {
-            //String sql = report.sql;
             String sql = report.getSql();
-            Scanner sc = new Scanner(System.in);
 
-            // Handle continent parameter if it exists
+            // Use the injected Scanner (either System.in in production or a test scanner)
+            Scanner sc = input;
+
+            // Handle continent parameter
             if (sql.contains("%continent%")) {
-                //System.out.print(report.parameterPrompt + ": ");
                 System.out.print(report.getParameterPrompt() + ": ");
                 String continent = sc.nextLine();
                 sql = sql.replace("%continent%", continent);
             }
 
-            // Handle N parameter if it exists
+            // Handle N parameter
             if (sql.contains("%n%")) {
                 System.out.print("Please enter the number of results to show: ");
                 String n = sc.nextLine();
@@ -75,17 +85,18 @@ public class ReportService {
 
             // Handle other single parameters
             if (report.getParameterName() != null && !report.getParameterName().isEmpty() &&
-                !report.getParameterName().equals("continent") && !report.getParameterName().equals("n")) {
+                    !report.getParameterName().equals("continent") &&
+                    !report.getParameterName().equals("n")) {
                 System.out.print(report.getParameterPrompt() + ": ");
                 String value = sc.nextLine();
                 sql = sql.replace("%" + report.getParameterName() + "%", value);
             }
 
+            // Execute the SQL
             Statement stmt = con.createStatement();
-            //Execute the sql from the database
             ResultSet rs = stmt.executeQuery(sql);
 
-            //Loading the report and preparing the output
+            // Print results using TablePrinter
             System.out.println("\n=== " + report.getTitle() + " ===");
             TablePrinter.printResultSet(rs);
 
