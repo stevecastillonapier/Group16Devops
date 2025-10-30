@@ -9,12 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.ByteArrayInputStream;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,7 +24,7 @@ import static org.mockito.Mockito.*;
  */
 @DisplayName("ReportService Tests")
 class ReportServiceTest {
-    /*
+
 
     @Mock
     private Connection con;
@@ -48,27 +47,44 @@ class ReportServiceTest {
     }
 
     @Test
-    @DisplayName("Should run report")
+    @DisplayName("Should run report and print realistic table")
     void testRunReport() throws SQLException {
-        // Test running a report successfully
         int reportId = 1;
         Report report = new Report();
-        report.id = reportId;
-        report.title = "Test Report";
-        report.sql = "SELECT * FROM test";
-        report.parameterName = "";
-        report.parameterPrompt = "";
-        
+        report.setId(reportId);
+        report.setTitle("Test Report");
+        report.setSql("SELECT * FROM test");
+        report.setParameterName("");
+        report.setParameterPrompt("");
+
+        // --- Mock ResultSetMetaData (2 columns: id, name)
+        ResultSetMetaData md = mock(ResultSetMetaData.class);
+        when(md.getColumnCount()).thenReturn(2);
+        when(md.getColumnLabel(1)).thenReturn("id");
+        when(md.getColumnLabel(2)).thenReturn("Title");
+
+        // --- Mock ResultSet with realistic data
+        when(rs.getMetaData()).thenReturn(md);
+        when(rs.next()).thenReturn(true, false); // only one row
+        when(rs.getObject(1)).thenReturn(1);
+        when(rs.getObject(2)).thenReturn("Report 1");
+
+        // --- Mock repository, connection, and statement
         when(repo.getReportById(reportId)).thenReturn(report);
         when(con.createStatement()).thenReturn(stmt);
         when(stmt.executeQuery(anyString())).thenReturn(rs);
 
+        // --- Run the method
         service.runReport(reportId);
 
+        // --- Verify interactions
         verify(repo).getReportById(reportId);
         verify(con).createStatement();
-        verify(stmt).executeQuery(report.sql);
+        verify(stmt).executeQuery(report.getSql());
     }
+
+
+
 
     @Test
     @DisplayName("Should handle invalid report ID")
@@ -89,13 +105,13 @@ class ReportServiceTest {
         // Test getting all reports through the service
         List<Report> expectedReports = new ArrayList<>();
         Report report1 = new Report();
-        report1.id = 1;
-        report1.title = "Report 1";
+        report1.setId(1);// = 1;
+        report1.setTitle("Report 1");// = ;
         expectedReports.add(report1);
         
         Report report2 = new Report();
-        report2.id = 2;
-        report2.title = "Report 2";
+        report2.setId(2); //= 2;
+        report2.setTitle("Report 2"); //= ;
         expectedReports.add(report2);
         
         when(repo.getAllReports()).thenReturn(expectedReports);
@@ -104,8 +120,8 @@ class ReportServiceTest {
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals("Report 1", result.get(0).title);
-        assertEquals("Report 2", result.get(1).title);
+        assertEquals("Report 1", result.get(0).getTitle());
+        assertEquals("Report 2", result.get(1).getTitle());
         verify(repo).getAllReports();
     }
 
@@ -115,39 +131,59 @@ class ReportServiceTest {
         // Test getting a specific report through the service
         int reportId = 1;
         Report expectedReport = new Report();
-        expectedReport.id = reportId;
-        expectedReport.title = "Test Report";
+        expectedReport.setId(reportId); //= ;
+        expectedReport.setTitle("Test Report");// = ;
         
         when(repo.getReportById(reportId)).thenReturn(expectedReport);
 
         Report result = service.getReportById(reportId);
 
         assertNotNull(result);
-        assertEquals(reportId, result.id);
-        assertEquals("Test Report", result.title);
+        assertEquals(reportId, result.getId());
+        assertEquals("Test Report", result.getTitle());
         verify(repo).getReportById(reportId);
     }
-
     @Test
     @DisplayName("Should handle report with parameters")
     void testRunReportWithParameters() throws SQLException {
-        // Test reports that need user input (like asking for a continent)
+        // Simulate user typing “Europe”
+        ByteArrayInputStream fakeInput = new ByteArrayInputStream("Europe\n".getBytes());
+        Scanner fakeScanner = new Scanner(fakeInput);
+
+        // Use the overloaded constructor
+        ReportService service = new ReportService(repo, con, fakeScanner);
+
+        // Prepare report
         Report report = new Report();
-        report.id = 1;
-        report.title = "Test Report";
-        report.sql = "SELECT * FROM test WHERE region = '%region%'";
-        report.parameterName = "region";
-        report.parameterPrompt = "Please enter region";
-        
+        report.setId(1);
+        report.setTitle("Test Report");
+        report.setSql("SELECT * FROM test WHERE region = '%region%'");
+        report.setParameterName("region");
+        report.setParameterPrompt("Please enter region");
+
+        // Mock repository
         when(repo.getReportById(1)).thenReturn(report);
         when(con.createStatement()).thenReturn(stmt);
-        when(stmt.executeQuery(anyString())).thenReturn(rs);
 
+        // Mock ResultSet and metadata
+        ResultSetMetaData md = mock(ResultSetMetaData.class);
+        when(md.getColumnCount()).thenReturn(2);
+        when(md.getColumnLabel(1)).thenReturn("id");
+        when(md.getColumnLabel(2)).thenReturn("Title");
+
+        when(rs.getMetaData()).thenReturn(md);
+        when(rs.next()).thenReturn(true, false); // 1 row
+        when(rs.getObject(1)).thenReturn(1);             // id
+        when(rs.getObject(2)).thenReturn("Test User");   // name
+
+        // Execute query returns mocked ResultSet
+        when(stmt.executeQuery("SELECT * FROM test WHERE region = 'Europe'")).thenReturn(rs);
+
+        // Run
         service.runReport(1);
 
-        verify(repo).getReportById(1);
-        verify(con).createStatement();
-        verify(stmt).executeQuery(anyString());
+        // Verify correct query was used
+        verify(stmt).executeQuery("SELECT * FROM test WHERE region = 'Europe'");
     }
 
     @Test
@@ -155,11 +191,11 @@ class ReportServiceTest {
     void testRunReportError() throws SQLException {
         // Test what happens if there's a database error
         Report report = new Report();
-        report.id = 1;
-        report.title = "Test Report";
-        report.sql = "SELECT * FROM test";
-        report.parameterName = "";
-        report.parameterPrompt = "";
+        report.setId(1);// = 1;
+        report.setTitle("Test Report");// = ;
+        report.setSql("SELECT * FROM test");// = ;
+        report.setParameterName(""); //= "";
+        report.setParameterPrompt("");// = "";
         
         when(repo.getReportById(1)).thenReturn(report);
         when(con.createStatement()).thenReturn(stmt);
@@ -172,5 +208,5 @@ class ReportServiceTest {
         verify(stmt).executeQuery(anyString());
     }
 
-     */
+
 }
