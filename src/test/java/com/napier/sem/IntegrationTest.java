@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @DisplayName("Integration Tests - Real Database")
 class IntegrationTest {
-/*
+
     private Connection con;
     private ReportRepository repo;
     private ReportService service;
@@ -36,7 +36,7 @@ class IntegrationTest {
             con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/world?useSSL=false&allowPublicKeyRetrieval=true", 
                 "root", 
-                "example"
+                "CRGroup16"
             );
             
             repo = new ReportRepository(con);
@@ -64,21 +64,21 @@ class IntegrationTest {
             System.out.println("Skipping test - no database connection");
             return;
         }
-        
+
         List<Report> reports = service.getAllReports();
 
         assertNotNull(reports);
         assertTrue(reports.size() > 0, "Should have at least one report in database");
-        
+
         // Check first report has required fields
         Report firstReport = reports.get(0);
-        assertNotNull(firstReport.title);
-        assertNotNull(firstReport.sql);
-        assertTrue(firstReport.id > 0);
-        
+        assertNotNull(firstReport.getTitle());
+        assertNotNull(firstReport.getSql());
+        assertTrue(firstReport.getId() > 0);
+
         System.out.println("✅ Found " + reports.size() + " reports in database");
     }
-
+    /**/
     @Test
     @DisplayName("Should get specific report by ID from Docker database")
     void testGetReportById() {
@@ -90,11 +90,11 @@ class IntegrationTest {
         Report report = service.getReportById(1);
 
         assertNotNull(report);
-        assertEquals(1, report.id);
-        assertNotNull(report.title);
-        assertNotNull(report.sql);
+        assertEquals(1, report.getId());
+        assertNotNull(report.getTitle());
+        assertNotNull(report.getSql());
         
-        System.out.println("✅ Retrieved report: " + report.title);
+        System.out.println("✅ Retrieved report: " + report.getTitle());
     }
 
     @Test
@@ -126,15 +126,15 @@ class IntegrationTest {
         
         // Check for some key reports
         boolean hasCountryReport = reports.stream()
-            .anyMatch(r -> r.title != null && r.title.contains("countries"));
+            .anyMatch(r -> r.getTitle() != null && r.getTitle().contains("countries"));
         assertTrue(hasCountryReport, "Should have country reports");
         
         boolean hasCityReport = reports.stream()
-            .anyMatch(r -> r.title != null && r.title.contains("cities"));
+            .anyMatch(r -> r.getTitle() != null && r.getTitle().contains("cities"));
         assertTrue(hasCityReport, "Should have city reports");
         
         System.out.println("✅ Database contains " + reports.size() + " reports including required types");
     }
 
- */
+    /**/
 }
