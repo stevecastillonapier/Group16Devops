@@ -1,0 +1,32 @@
+name: Feature request
+description: Suggest a new feature or improvement.
+title: "[FEATURE] "
+labels: enhancement
+assignees: ""
+body:
+  - type: input
+    id: feature-description
+    attributes:
+      label: Feature description
+      description: Describe the feature you want
+      placeholder: "Add a new report type for the application"
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Benefits
+      description: Explain why this feature is useful
+
+  - type: input
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Are there other ways to solve this problem?
+
+  - type: input
+    id: additional-info
+    attributes:
+      label: Additional information
+      description: Any extra context or screenshots
