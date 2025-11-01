@@ -9,6 +9,7 @@
 
 ![Code Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen?logo=codecov&logoColor=white)
 
+[![codecov](https://codecov.io/github/stevecastillonapier/Group16Devops/branch/develop/graph/badge.svg?token=3IL31FFN0H)](https://codecov.io/github/stevecastillonapier/Group16Devops)
 ## Requirements Completion Status
 
 **32 requirements of 32 have been implemented, which is 100%.**
