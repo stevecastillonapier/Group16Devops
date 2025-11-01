@@ -28,12 +28,13 @@ jobs:
           docker run --name worldDb --hostname db -dp 3306:3306 db
       - name: Unit and integration tests
         #run: mvn -Dtest=com.napier.sem.* test
-        run: mvn test
+        run: mvn clean test jacoco:report
       - name: Stop database docker container
         run: |
           docker stop worldDb
           docker rm worldDb
           docker image rm db
+
       - name: Update CodeCov reports
         #uses: codecov/codecov-action@v4.0.1
         uses: codecov/codecov-action@v5
