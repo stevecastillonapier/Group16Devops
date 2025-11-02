@@ -24,14 +24,20 @@ public class ReportMenu {
     }
 
     /**
+     * Check if we're running in CI environment
+     * This method can be overridden in tests
+     */
+    protected boolean isCiEnvironment() {
+        return System.getenv("CI") != null;
+    }
+    /**
      * Displays the main menu to the user, lists available reports, and handles user input
      * to execute the selected report or exit.
      */
     public void displayMainMenu() {
 
-        if (System.getenv("CI") != null) {
+        if (isCiEnvironment()) {
             System.out.println("Running in CI environment — skipping interactive menu.");
-
             return;
         }
 
