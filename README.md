@@ -7,8 +7,6 @@
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/stevecastillonapier/Group16Devops/main.yml?branch=develop&label=develop%20build)
 
-![Code Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen?logo=codecov&logoColor=white)
-
 [![codecov](https://codecov.io/github/stevecastillonapier/Group16Devops/branch/develop/graph/badge.svg?token=3IL31FFN0H)](https://codecov.io/github/stevecastillonapier/Group16Devops)
 ## Requirements Completion Status
 [![codecov](https://codecov.io/github/stevecastillonapier/Group16Devops/graph/badge.svg?token=3IL31FFN0H)](https://codecov.io/github/stevecastillonapier/Group16Devops)

@@ -1,0 +1,44 @@
+name: Bug report
+description: Report a problem or error in the program
+title: "[BUG] "
+labels: bug
+assignees: ""
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Describe the bug**
+        A clear and concise description of what the bug is.
+
+  - type: input
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: List the steps needed to reproduce the bug
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: input
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: Describe what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Output
+      description: Add any screenshots or output that helps illustrate the problem
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Java version, or any relevant info
+      placeholder: Windows 10, Java 17
