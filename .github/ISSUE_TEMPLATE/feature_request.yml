@@ -2,7 +2,7 @@ name: Feature request
 description: Suggest a new feature or improvement.
 title: "[FEATURE] "
 labels: enhancement
-assignees: ""
+assignees: []
 body:
   - type: input
     id: feature-description
