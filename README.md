@@ -12,40 +12,40 @@
 
 **32 requirements of 32 have been implemented, which is 100%.**
 
-| ID | Name | Met | Screenshot                                                          |
-|----|------|-----|---------------------------------------------------------------------|
-| 1 | All the countries in the world organised by largest population to smallest. | Yes | ![Report1](screenshots/final/report1.jpg)                           |
-| 2 | All the countries in a continent organised by largest population to smallest. | Yes | ![Report 2](screenshots/final/report-48-countries-continent.png)    |
-| 3 | All the countries in a region organised by largest population to smallest. | Yes | ![Report 3](screenshots/final/report-49-countries-region.png)       |
-| 4 | The top N populated countries in the world where N is provided by the user. | Yes | ![Report 4](screenshots/final/report-50-top-countries-world.png)    |
+| ID | Name | Met | Screenshot                                                           |
+|----|------|-----|----------------------------------------------------------------------|
+| 1 | All the countries in the world organised by largest population to smallest. | Yes | ![Report 1](screenshots/final/report1.jpg)                           |
+| 2 | All the countries in a continent organised by largest population to smallest. | Yes | ![Report 2](screenshots/final/report-48-countries-continent.png)     |
+| 3 | All the countries in a region organised by largest population to smallest. | Yes | ![Report 3](screenshots/final/report-49-countries-region.png)        |
+| 4 | The top N populated countries in the world where N is provided by the user. | Yes | ![Report 4](screenshots/final/report-50-top-countries-world.png)     |
 | 5 | The top N populated countries in a continent where N is provided by the user. | Yes | ![Report 5](screenshots/final/report-51-top-countries-continent.png) |
-| 6 | The top N populated countries in a region where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 7 | All the cities in the world organised by largest population to smallest. | Yes | ![Report 7](screenshots/final/report-52-all-cities-world.png)       |
-| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![Report 8](screenshots/final/report-53-cities-continent.png)       |
-| 9 | All the cities in a region organised by largest population to smallest. | Yes | ✅ Implemented                                                       |
-| 10 | All the cities in a country organised by largest population to smallest. | Yes | ✅ Implemented                                                       |
-| 11 | All the cities in a district organised by largest population to smallest. | Yes | ✅ Implemented                                                       |
-| 12 | The top N populated cities in the world where N is provided by the user. | Yes | ![Report 12](screenshots/final/report-54-top-cities-world.png)      |
-| 13 | The top N populated cities in a continent where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 14 | The top N populated cities in a region where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 15 | The top N populated cities in a country where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 16 | The top N populated cities in a district where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 17 | All the capital cities in the world organised by largest population to smallest. | Yes | ![Report 17](screenshots/final/report-55-capital-cities.png)        |
-| 18 | All the capital cities in a continent organised by largest population to smallest. | Yes | ✅ Implemented                                                       |
-| 19 | All the capital cities in a region organised by largest to smallest. | Yes | ✅ Implemented                                                       |
-| 20 | The top N populated capital cities in the world where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 21 | The top N populated capital cities in a continent where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 22 | The top N populated capital cities in a region where N is provided by the user. | Yes | ✅ Implemented                                                       |
-| 23 | The population of people, people living in cities, and people not living in cities in each continent. | Yes | ✅ Implemented                                                       |
-| 24 | The population of people, people living in cities, and people not living in cities in each region. | Yes | ✅ Implemented                                                       |
-| 25 | The population of people, people living in cities, and people not living in cities in each country. | Yes | ✅ Implemented                                                       |
-| 26 | The population of the world. | Yes | ![Report 26](screenshots/final/report-56-population-summary.png)    |
-| 27 | The population of a continent. | Yes | ✅ Implemented                                                       |
-| 28 | The population of a region. | Yes | ✅ Implemented                                                       |
-| 29 | The population of a country. | Yes | ✅ Implemented                                                       |
-| 30 | The population of a district. | Yes | ✅ Implemented                                                       |
-| 31 | The population of a city. | Yes | ✅ Implemented                                                       |
-| 32 | The number of people who speak Chinese, English, Hindi, Spanish, and Arabic. | Yes | ![Report 32](screenshots/final/report-57-language-population.png)   |
+| 6 | The top N populated countries in a region where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 7 | All the cities in the world organised by largest population to smallest. | Yes | ![Report 7](screenshots/final/report-52-all-cities-world.png)        |
+| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![Report 8](screenshots/final/report-53-cities-continent.png)        |
+| 9 | All the cities in a region organised by largest population to smallest. | Yes | ✅ Implemented                                                        |
+| 10 | All the cities in a country organised by largest population to smallest. | Yes | ✅ Implemented                                                        |
+| 11 | All the cities in a district organised by largest population to smallest. | Yes | ✅ Implemented                                                        |
+| 12 | The top N populated cities in the world where N is provided by the user. | Yes | ![Report 12](screenshots/final/report-54-top-cities-world.png)       |
+| 13 | The top N populated cities in a continent where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 14 | The top N populated cities in a region where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 15 | The top N populated cities in a country where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 16 | The top N populated cities in a district where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 17 | All the capital cities in the world organised by largest population to smallest. | Yes | ![Report 17](screenshots/final/report-55-capital-cities.png)         |
+| 18 | All the capital cities in a continent organised by largest population to smallest. | Yes | ✅ Implemented                                                        |
+| 19 | All the capital cities in a region organised by largest to smallest. | Yes | ✅ Implemented                                                        |
+| 20 | The top N populated capital cities in the world where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 21 | The top N populated capital cities in a continent where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 22 | The top N populated capital cities in a region where N is provided by the user. | Yes | ✅ Implemented                                                        |
+| 23 | The population of people, people living in cities, and people not living in cities in each continent. | Yes | ✅ Implemented                                                        |
+| 24 | The population of people, people living in cities, and people not living in cities in each region. | Yes | ✅ Implemented                                                        |
+| 25 | The population of people, people living in cities, and people not living in cities in each country. | Yes | ✅ Implemented                                                        |
+| 26 | The population of the world. | Yes | ![Report 26](screenshots/final/report-56-population-summary.png)     |
+| 27 | The population of a continent. | Yes | ✅ Implemented                                                        |
+| 28 | The population of a region. | Yes | ✅ Implemented                                                        |
+| 29 | The population of a country. | Yes | ✅ Implemented                                                        |
+| 30 | The population of a district. | Yes | ✅ Implemented                                                        |
+| 31 | The population of a city. | Yes | ✅ Implemented                                                        |
+| 32 | The number of people who speak Chinese, English, Hindi, Spanish, and Arabic. | Yes | ![Report 32](screenshots/final/report-57-language-population.png)    |
 
 
 
