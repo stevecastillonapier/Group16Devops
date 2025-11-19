@@ -110,7 +110,7 @@ For example, if you want to generate the report
 which has an ID of 1 in the reports table of the database,
 your ENTRYPOINT should look like this:
 ```Dockerfile
-ENTRYPOINT ["java", "-jar", "reportHub-0.1.0.0-jar-with-dependencies.jar", "1"]
+ENTRYPOINT ["java", "-jar", "devops.jar","1"]
 ```
 When the container starts, it will automatically run the program and produce the report corresponding to the ID specified.
 
@@ -135,7 +135,7 @@ docker exec -it <app_container_name> /bin/bash
 ```
 4. From inside the container, run:
 ```bash
-java -jar /tmp/reportHub-0.1.0.0-jar-with-dependencies.jar
+java -jar /tmp/devops.jar
 ```
 The program will present an interactive menu allowing you to select the report you want to view.
 
