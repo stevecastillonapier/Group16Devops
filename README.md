@@ -9,6 +9,55 @@
 
 [![codecov](https://codecov.io/github/stevecastillonapier/Group16Devops/graph/badge.svg?token=3IL31FFN0H)](https://codecov.io/github/stevecastillonapier/Group16Devops)
 
+## Description
+This project is a coursework assignment for a DevOps module that demonstrates the principles of integrating a Java application with a MySQL database.
+The application provides an easy way to access and generate reports on population information.
+It also includes automated builds, Dockerization, and GitHub Actions for continuous integration and delivery.  The program uses a reporting service and pulls queries and parameters directly from the database.  This structure provides a better method for scalability if other reports need to be generated quickly.
+
+## Project Architecture
+- **Language:** Java 17
+- **Build Tool:** Maven
+- **Database:** Mysql
+- **Containerization:** Docker
+- **CI/CD:** GitHub Actions
+
+## Branching Strategy
+We use **GitFlow**:
+- `main:` Production-ready code
+- `develop:` Integration of new features
+- `feature/*:` New feature branches
+- `release/*:` Pre-release stabilization
+
+## Getting Started
+### Prerequisites
+- Java 17+
+- Maven 3.8+
+- Docker
+
+### Installation
+```bash
+# 1. Clone the repository
+git clone https://github.com/stevecastillonapier/Group16Devops.git
+
+# 2. Navigate to the project directory
+cd Group16Devops
+
+# 3. Build the Maven package (creates the JAR file in /target)
+mvn clean package
+
+# 4. Build and start all containers using Docker Compose
+docker-compose up --build -d
+
+# 5. (Optional) Check running containers
+docker ps
+
+```
+
+### How to Stop Containers
+```bash
+# To stop and remove containers, networks, and volumes:
+docker-compose down
+```
 
 ## List of reports and Screenshoots
 **32 requirements of 32 have been implemented, which is 100%.**
@@ -47,58 +96,6 @@
 | 30 | The population of a district. | Yes | ![Report30](screenshots/final/report30.jpg)  |
 | 31 | The population of a city. | Yes | ![Report31](screenshots/final/report31.jpg)  |
 | 32 | The number of people who speak Chinese, English, Hindi, Spanish, and Arabic. | Yes | ![Report 32](screenshots/final/report32.jpg) |
-
-
-
-## Description
-This project is a coursework assignment for a DevOps module that demonstrates the principles of integrating a Java application with a MySQL database.
-The application provides an easy way to access and generate reports on population information.
-It also includes automated builds, Dockerization, and GitHub Actions for continuous integration and delivery.  The program uses a reporting service and pulls queries and parameters directly from the database.  This structure provides a better method for scalability if other reports need to be generated quickly.
-
-## Project Architecture
-- **Language:** Java 17
-- **Build Tool:** Maven
-- **Database:** Mysql
-- **Containerization:** Docker
-- **CI/CD:** GitHub Actions  
-
-## Branching Strategy
-We use **GitFlow**:
-- `main:` Production-ready code
-- `develop:` Integration of new features
-- `feature/*:` New feature branches
-- `release/*:` Pre-release stabilization   
-
-## Getting Started
-### Prerequisites
-- Java 17+
-- Maven 3.8+
-- Docker
-
-### Installation
-```bash
-# 1. Clone the repository
-git clone https://github.com/stevecastillonapier/Group16Devops.git
-
-# 2. Navigate to the project directory
-cd Group16Devops
-
-# 3. Build the Maven package (creates the JAR file in /target)
-mvn clean package
-
-# 4. Build and start all containers using Docker Compose
-docker-compose up --build -d
-
-# 5. (Optional) Check running containers
-docker ps
-
-```
-
-### How to Stop Containers
-```bash
-# To stop and remove containers, networks, and volumes:
-docker-compose down
-```
 
 ## Running the program in non-interactive mode
 To run the program in non-interactive mode, you’ll need to modify the Dockerfile located in the root of the project.
