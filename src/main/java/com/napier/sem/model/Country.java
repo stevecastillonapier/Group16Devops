@@ -205,4 +205,12 @@ public class Country {
         return Objects.equals(code, country.code);
     }
 
+    /**
+     * Implements hashCode contract consistent with equals (based on Code).
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(code);
+    }
+
 }
