@@ -1,4 +1,7 @@
 package com.napier.sem.model;
+
+import java.util.Objects;
+
 /**
  * Represents a CountryLanguage entity, and used as a data model that captures information
  * about a language spoken in a specific country.
@@ -69,6 +72,15 @@ public class Countrylanguage {
         return percentage;
     }
 
+
+    // --- Setters (Added for DTO completeness) ---
+
+    public void setCountryCode(String countryCode) { this.countryCode = countryCode; }
+    public void setLanguage(String language) { this.language = language; }
+    public void setIsOfficial(String isOfficial) { this.isOfficial = isOfficial; }
+    public void setPercentage(double percentage) { this.percentage = percentage; }
+
+
     /**
      * Provides a string representation of the Countrylanguage object for logging and debugging.
      * @return A formatted string showing all field values.
@@ -82,4 +94,26 @@ public class Countrylanguage {
                 ", percentage=" + percentage +
                 '}';
     }
+
+    /**
+     * Implements equals contract based on the composite primary key: countryCode and language.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Countrylanguage that = (Countrylanguage) o;
+        return Objects.equals(countryCode, that.countryCode) &&
+                Objects.equals(language, that.language);
+    }
+
+    /**
+     * Implements hashCode contract consistent with equals.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(countryCode, language);
+    }
+
+
 }
