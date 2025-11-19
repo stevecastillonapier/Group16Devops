@@ -64,7 +64,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
       - name: Run docker compose
-        run: docker compose up --abort-on-container-exit
+        run: docker compose up --build --abort-on-container-exit
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
