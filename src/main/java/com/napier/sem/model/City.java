@@ -30,10 +30,10 @@ public class City {
      */
     public City(int ID, String name, String countryCode, String district, int population) {
         this.id = ID;
-        name = name;
-        countryCode = countryCode;
-        district = district;
-        population = population;
+        this.name = name;
+        this.countryCode = countryCode;
+        this.district = district;
+        this.population = population;
     }
 
     /**
