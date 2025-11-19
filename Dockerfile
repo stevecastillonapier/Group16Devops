@@ -1,4 +1,5 @@
-FROM openjdk:17-jdk-slim
+#FROM openjdk:17-jdk-slim
+FROM amazoncorretto:17
 COPY ./target/devops.jar /tmp
 WORKDIR /tmp
 ENTRYPOINT ["java", "-jar", "devops.jar","1"]
