@@ -1,5 +1,7 @@
 package com.napier.sem.model;
 
+import java.util.Objects;
+
 /**
  * Represents a Country entity, serving as a Data Transfer Object (DTO) and Model
  * to hold information about a country from the database.
@@ -191,4 +193,16 @@ public class Country {
                 ", CapitalName='" + capitalName + '\'' +
                 '}';
     }
+
+    /**
+     * Implements equals contract based on the primary key (Code).
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Country country = (Country) o;
+        return Objects.equals(code, country.code);
+    }
+
 }
