@@ -14,6 +14,12 @@ This project is a coursework assignment for a DevOps module that demonstrates th
 The application provides an easy way to access and generate reports on population information.
 It also includes automated builds, Dockerization, and GitHub Actions for continuous integration and delivery.  The program uses a reporting service and pulls queries and parameters directly from the database.  This structure provides a better method for scalability if other reports need to be generated quickly.
 
+### The scrum team - Group 16
+- Steve Castillo - Belize - 40773008@live.napier.ac.uk
+- Danny Itza - Belize - 40735791@live.napier.ac.uk
+- Mark Otuya - Nigeria - 40796688@live.napier.ac.uk
+- Saoud Mohammed Masoud Dhafer Al Ahbabi - United Kingdom - 40793305@live.napier.ac.uk
+
 ## Project Architecture
 - **Language:** Java 17
 - **Build Tool:** Maven
@@ -155,10 +161,5 @@ docker-compose up --build
 ```
 2. Make sure no Mysql instances are not running on your computer and causing conflict.
 
-### The scrum team - Group 16
-- Steve Castillo - Belize - 40773008@live.napier.ac.uk
-- Danny Itza - Belize - 40735791@live.napier.ac.uk
-- Mark Otuya - Nigeria - 40796688@live.napier.ac.uk
-- Saoud Mohammed Masoud Dhafer Al Ahbabi - United Kingdom - 40793305@live.napier.ac.uk
 
 
