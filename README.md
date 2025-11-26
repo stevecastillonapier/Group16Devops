@@ -27,6 +27,16 @@ It also includes automated builds, Dockerization, and GitHub Actions for continu
 - **Containerization:** Docker
 - **CI/CD:** GitHub Actions
 
+## Continuous Integration
+Our GitHub Actions workflow automatically runs unit and integration tests on every push to master and develop branches. The CI pipeline:
+- Executes all unit tests using Maven
+- Runs integration tests with Docker database container
+- Generates code coverage reports using JaCoCo
+- Uploads coverage metrics to Codecov
+- Builds the application and creates release artifacts
+
+All tests must pass before code is merged to the main branches.
+
 ## Branching Strategy
 We use **GitFlow**:
 - `main:` Production-ready code
