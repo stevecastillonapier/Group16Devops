@@ -208,5 +208,54 @@ class ReportServiceTest {
         verify(stmt).executeQuery(anyString());
     }
 
+    @Test
+    @DisplayName("Should handle empty SQL query")
+    void testRunReportWithEmptySql() throws SQLException {
+        // Test edge case: report with empty SQL
+        Report report = new Report();
+        report.setId(99);
+        report.setTitle("Empty SQL Report");
+        report.setSql("");
+        report.setParameterName("");
+        report.setParameterPrompt("");
+        
+        when(repo.getReportById(99)).thenReturn(report);
+        when(con.createStatement()).thenReturn(stmt);
+        when(stmt.executeQuery("")).thenReturn(rs);
+        when(rs.next()).thenReturn(false); // Empty result set
+        
+        service.runReport(99);
+        
+        verify(repo).getReportById(99);
+        verify(con).createStatement();
+        verify(stmt).executeQuery("");
+    }
+
+    @Test
+    @DisplayName("Should handle null parameter input")
+    void testRunReportWithNullParameter() throws SQLException {
+        // Test edge case: null parameter handling
+        Report report = new Report();
+        report.setId(100);
+        report.setTitle("Null Parameter Test");
+        report.setSql("SELECT * FROM test WHERE name = '%name%'");
+        report.setParameterName("name");
+        report.setParameterPrompt("Enter name");
+        
+        ByteArrayInputStream fakeInput = new ByteArrayInputStream("\n".getBytes());
+        Scanner fakeScanner = new Scanner(fakeInput);
+        ReportService serviceWithScanner = new ReportService(repo, con, fakeScanner);
+        
+        when(repo.getReportById(100)).thenReturn(report);
+        when(con.createStatement()).thenReturn(stmt);
+        when(stmt.executeQuery(contains("name = ''"))).thenReturn(rs);
+        when(rs.next()).thenReturn(false);
+        
+        serviceWithScanner.runReport(100);
+        
+        verify(repo).getReportById(100);
+        verify(stmt).executeQuery(anyString());
+    }
+
 
 }
