@@ -1,8 +1,9 @@
 name: A workflow for group 16 CW App
 on:
   push:
-    branches: #[ master, develop ]
+    branches:
       - master
+      - develop
     paths-ignore:
       - 'README.md'
       - '**/*.md'
