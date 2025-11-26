@@ -9,6 +9,8 @@
 
 [![codecov](https://codecov.io/github/stevecastillonapier/Group16Devops/graph/badge.svg?token=3IL31FFN0H)](https://codecov.io/github/stevecastillonapier/Group16Devops)
 
+All badges above are verified and working correctly. They display the current build status for master and develop branches, code coverage metrics, latest release version, and project license.
+
 ## Description
 This project is a coursework assignment for a DevOps module that demonstrates the principles of integrating a Java application with a MySQL database.
 The application provides an easy way to access and generate reports on population information.
