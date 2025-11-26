@@ -34,6 +34,9 @@ We use **GitFlow**:
 - `feature/*:` New feature branches
 - `release/*:` Pre-release stabilization
 
+## Bug Reporting
+We use GitHub Issues for bug tracking and reporting. If you encounter any issues or bugs, please create a new issue using our bug report template. The template helps ensure we have all the necessary information to address the problem effectively.
+
 ## Getting Started
 ### Prerequisites
 - Java 17+
